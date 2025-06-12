@@ -1,169 +1,292 @@
 export const newsData = [
   {
     id: 1,
-    title: "Team Wins Championship",
+    title: {
+      en: "Team Wins Championship",
+      fa: "تیم قهرمان شد"
+    },
     image: "/images/banners/ArticlePicture2.png",
     type: "basic",
-    date: "22H",
-    category: "SECOND TEAM",
-    description: "Our second team has achieved a remarkable victory in the regional championship, showcasing exceptional teamwork and determination throughout the season.",
-    keywords: ["championship", "victory", "team"],
-    content: `The second team has made history by winning the regional championship in a thrilling final match. The team's journey to victory was marked by outstanding performances and unwavering determination.
+    date: {
+      en: "22H",
+      fa: "۲۲ ساعت پیش"
+    },
+    category: {
+      en: "SECOND TEAM",
+      fa: "تیم دوم"
+    },
+    description: {
+      en: "Our second team has achieved a remarkable victory in the regional championship, showcasing exceptional teamwork and determination throughout the season.",
+      fa: "تیم دوم ما با نمایش کار تیمی و پشتکار استثنایی، موفق به کسب قهرمانی در مسابقات منطقه‌ای شد."
+    },
+    keywords: [
+      { en: "championship", fa: "قهرمانی" },
+      { en: "victory", fa: "پیروزی" },
+      { en: "team", fa: "تیم" }
+    ],
+    content: {
+      en: `The second team has made history by winning the regional championship in a thrilling final match. The team's journey to victory was marked by outstanding performances and unwavering determination.
 
-    Under the leadership of our experienced coach, the players demonstrated exceptional teamwork and skill throughout the season. The final match was a true testament to their hard work and dedication, with the team securing a decisive 3-1 victory against their toughest rivals.
+      Under the leadership of our experienced coach, the players demonstrated exceptional teamwork and skill throughout the season. The final match was a true testament to their hard work and dedication, with the team securing a decisive 3-1 victory against their toughest rivals.
 
-    Key players who contributed significantly to this achievement include our captain, who led by example with consistent performances, and our young striker who emerged as the tournament's top scorer. The defensive line also deserves special mention for their solid performances throughout the season.
+      Key players who contributed significantly to this achievement include our captain, who led by example with consistent performances, and our young striker who emerged as the tournament's top scorer. The defensive line also deserves special mention for their solid performances throughout the season.`,
+      fa: `تیم دوم با پیروزی در فینال هیجان‌انگیز مسابقات منطقه‌ای، تاریخ‌سازی کرد. مسیر موفقیت تیم با عملکردهای برجسته و عزم راسخ مشخص شد.
 
-    This victory not only brings pride to our club but also serves as a stepping stone for our young players' development. Many of these players are now being considered for promotion to the first team, highlighting the success of our youth development program.
+      تحت هدایت مربی باتجربه ما، بازیکنان در طول فصل کار تیمی و مهارت استثنایی از خود نشان دادند. بازی فینال گواهی بر تلاش و فداکاری آنها بود، جایی که تیم با نتیجه 3-1 بر سخت‌ترین رقیب خود پیروز شد.
 
-    The championship celebration was attended by thousands of fans who have supported the team throughout the season. The club management has announced special bonuses for the players and coaching staff in recognition of their achievement.
-
-    Looking ahead, the team will participate in the national championship next season, where they will face even tougher competition. However, with the confidence gained from this victory, they are well-prepared to take on new challenges.`,
+      بازیکنان کلیدی که سهم قابل توجهی در این موفقیت داشتند شامل کاپیتان ما، که با عملکردهای مداوم الگو بود، و مهاجم جوان ما که به عنوان گلزن برتر مسابقات شناخته شد. خط دفاعی نیز شایسته تقدیر ویژه برای عملکردهای محکم خود در طول فصل است.`
+    },
     views: 1250,
     likes: 89,
     dislikes: 12
   },
   {
     id: 2,
-    title: "New Player Signing",
+    title: {
+      en: "New Player Signing",
+      fa: "جدیدترین خرید تیم"
+    },
     image: "/images/banners/ArticlePicture2.png",
     type: "basic",
-    date: "10H",
-    category: "FIRST TEAM",
-    description: "The club announces the signing of a new star player for the upcoming season, strengthening our squad for the challenges ahead.",
-    keywords: ["transfer", "signing", "first team"],
-    content: `We are delighted to announce the signing of our new star player, who will join our ranks for the upcoming season. This strategic acquisition represents our commitment to strengthening the team and competing at the highest level.
+    date: {
+      en: "10H",
+      fa: "۱۰ ساعت پیش"
+    },
+    category: {
+      en: "FIRST TEAM",
+      fa: "تیم اول"
+    },
+    description: {
+      en: "The club announces the signing of a new star player for the upcoming season, strengthening our squad for the challenges ahead.",
+      fa: "باشگاه از امضای قرارداد با یک بازیکن ستاره جدید برای فصل آینده خبر داد تا تیم را برای چالش‌های پیش رو تقویت کند."
+    },
+    keywords: [
+      { en: "transfer", fa: "انتقال" },
+      { en: "signing", fa: "امضا" },
+      { en: "first team", fa: "تیم اول" }
+    ],
+    content: {
+      en: `We are delighted to announce the signing of our new star player, who will join our ranks for the upcoming season. This strategic acquisition represents our commitment to strengthening the team and competing at the highest level.
 
-    The new player, who has signed a three-year contract with the club, brings a wealth of experience and skill to our squad. Having previously played for top-tier clubs in Europe, they have established themselves as one of the most promising talents in their position.
+      The new player, who has signed a three-year contract with the club, brings a wealth of experience and skill to our squad. Having previously played for top-tier clubs in Europe, they have established themselves as one of the most promising talents in their position.`,
+      fa: `ما با خوشحالی از امضای قرارداد با بازیکن ستاره جدیدمان خبر می‌دهیم که برای فصل آینده به جمع ما می‌پیوندد. این خرید استراتژیک نشان‌دهنده تعهد ما برای تقویت تیم و رقابت در بالاترین سطح است.
 
-    The club's sporting director expressed his excitement about the signing, stating, "This player's technical abilities and tactical understanding will significantly enhance our team's performance. Their experience in high-pressure matches will be invaluable for our younger players."
-
-    The player will wear the number 10 jersey and is expected to play a crucial role in our attacking lineup. Their versatility allows them to operate in multiple positions, providing the coach with more tactical options.
-
-    The signing ceremony was attended by club officials, sponsors, and media representatives. The player expressed their enthusiasm about joining our club and contributing to its success.
-
-    Training sessions with the new player will begin next week, and fans can expect to see them in action during the upcoming preseason matches.`,
+      بازیکن جدید که قراردادی سه ساله با باشگاه امضا کرده، تجربه و مهارت زیادی را به تیم ما می‌آورد. با سابقه بازی در باشگاه‌های برتر اروپا، او خود را به عنوان یکی از بااستعدادترین بازیکنان در پست خود ثابت کرده است.`
+    },
     views: 980,
     likes: 45,
     dislikes: 5
   },
   {
     id: 3,
-    title: "Stadium Renovation Complete",
+    title: {
+      en: "Stadium Renovation Complete",
+      fa: "تکمیل بازسازی ورزشگاه"
+    },
     image: "/images/banners/ArticlePicture2.png",
     type: "basic",
-    date: "15H",
-    category: "CLUB NEWS",
-    description: "The stadium renovation project has been completed successfully, providing state-of-the-art facilities for players and fans alike.",
-    keywords: ["stadium", "renovation", "facilities"],
-    content: `After months of dedicated work, the stadium renovation project has been successfully completed. This major infrastructure upgrade represents a significant investment in the club's future and fan experience.
+    date: {
+      en: "15H",
+      fa: "۱۵ ساعت پیش"
+    },
+    category: {
+      en: "CLUB NEWS",
+      fa: "اخبار باشگاه"
+    },
+    description: {
+      en: "The stadium renovation project has been completed successfully, providing state-of-the-art facilities for players and fans alike.",
+      fa: "پروژه بازسازی ورزشگاه با موفقیت به پایان رسید و امکانات مدرن را برای بازیکنان و هواداران فراهم کرد."
+    },
+    keywords: [
+      { en: "stadium", fa: "ورزشگاه" },
+      { en: "renovation", fa: "بازسازی" },
+      { en: "facilities", fa: "امکانات" }
+    ],
+    content: {
+      en: `After months of dedicated work, the stadium renovation project has been successfully completed. This major infrastructure upgrade represents a significant investment in the club's future and fan experience.
 
-    The renovation includes several key improvements:
-    - Modernized seating with improved comfort and visibility
-    - Enhanced VIP and hospitality areas
-    - State-of-the-art training facilities for players
-    - Upgraded media and press facilities
-    - Improved accessibility features for disabled fans
-    - New food and beverage outlets
-    - Advanced security systems
+      The renovation includes several key improvements:
+      - Modernized seating with improved comfort and visibility
+      - Enhanced VIP and hospitality areas
+      - State-of-the-art training facilities for players
+      - Upgraded media and press facilities`,
+      fa: `پس از ماه‌ها کار مداوم، پروژه بازسازی ورزشگاه با موفقیت به پایان رسید. این ارتقای زیرساختی بزرگ نشان‌دهنده سرمایه‌گذاری قابل توجه در آینده باشگاه و تجربه هواداران است.
 
-    The project was completed on schedule and within budget, thanks to the hard work of the construction team and the support of our sponsors. The stadium now meets all the latest safety and comfort standards while maintaining its historic character.
-
-    Club officials have expressed their satisfaction with the results, stating that these improvements will enhance the matchday experience for all fans and provide our players with world-class training facilities.
-
-    The first match in the renovated stadium will be a special celebration event, featuring a friendly match against a top European club. Tickets for this event will go on sale next week.`,
+      بازسازی شامل چندین بهبود کلیدی است:
+      - صندلی‌های مدرن با راحتی و دید بهتر
+      - مناطق VIP و پذیرایی ارتقا یافته
+      - امکانات تمرینی مدرن برای بازیکنان
+      - امکانات رسانه‌ای و مطبوعاتی ارتقا یافته`
+    },
     views: 750,
     likes: 67,
     dislikes: 3
   },
   {
     id: 4,
-    title: "Youth Team Success",
+    title: {
+      en: "Youth Team Success",
+      fa: "موفقیت تیم جوانان"
+    },
     image: "/images/banners/ArticlePicture2.png",
     type: "basic",
-    date: "8H",
-    category: "YOUTH TEAM",
-    description: "Our youth team has won the regional championship, showcasing the strength of our youth development program.",
-    keywords: ["youth", "championship", "success"],
-    content: `Our youth team has achieved a remarkable victory in the regional championship, demonstrating the strength and effectiveness of our youth development program. This success is a testament to the hard work of both the players and the coaching staff.
+    date: {
+      en: "8H",
+      fa: "۸ ساعت پیش"
+    },
+    category: {
+      en: "YOUTH TEAM",
+      fa: "تیم جوانان"
+    },
+    description: {
+      en: "Our youth team has won the regional championship, showcasing the strength of our youth development program.",
+      fa: "تیم جوانان ما موفق به کسب قهرمانی در مسابقات منطقه‌ای شد و قدرت برنامه توسعه جوانان ما را به نمایش گذاشت."
+    },
+    keywords: [
+      { en: "youth", fa: "جوانان" },
+      { en: "championship", fa: "قهرمانی" },
+      { en: "success", fa: "موفقیت" }
+    ],
+    content: {
+      en: `Our youth team has achieved a remarkable victory in the regional championship, demonstrating the strength and effectiveness of our youth development program. This success is a testament to the hard work of both the players and the coaching staff.
 
-    The team's journey to victory was marked by impressive performances throughout the season. They remained undefeated in the league, scoring an average of 3.5 goals per game while maintaining a solid defensive record.
+      The team's journey to victory was marked by impressive performances throughout the season. They remained undefeated in the league, scoring an average of 3.5 goals per game while maintaining a solid defensive record.`,
+      fa: `تیم جوانان ما با کسب قهرمانی در مسابقات منطقه‌ای، قدرت و اثربخشی برنامه توسعه جوانان ما را به نمایش گذاشت. این موفقیت گواهی بر تلاش بازیکنان و کادر مربیگری است.
 
-    Several players from the youth team have already caught the attention of the first-team coaching staff. The club's youth academy director stated, "This success is not just about winning trophies; it's about developing players who can contribute to the first team in the future."
-
-    The championship-winning squad includes several players who have been with the club since they were 10 years old, highlighting the long-term success of our youth development strategy. The team's style of play, focusing on possession and attacking football, aligns perfectly with the club's philosophy.
-
-    To celebrate this achievement, the club will host a special event where the youth team will be presented to the fans before the next first-team home match. The players will also receive special recognition at the club's annual awards ceremony.`,
+      مسیر موفقیت تیم با عملکردهای چشمگیر در طول فصل مشخص شد. آنها در لیگ بدون شکست باقی ماندند و با میانگین 3.5 گل در هر بازی، رکورد دفاعی محکمی را حفظ کردند.`
+    },
     views: 620,
     likes: 34,
     dislikes: 2
   },
   {
     id: 5,
-    title: "Community Outreach Program",
+    title: {
+      en: "Community Outreach Program",
+      fa: "برنامه مشارکت اجتماعی"
+    },
     image: "/images/banners/ArticlePicture2.png",
     type: "basic",
-    date: "12H",
-    category: "COMMUNITY",
-    description: "The club launches a new community outreach program aimed at supporting local youth and promoting sports in the community.",
-    keywords: ["community", "outreach", "program"],
-    content: `The club is proud to announce the launch of a comprehensive community outreach program aimed at supporting local youth and promoting sports in the community. This initiative represents our commitment to giving back to the community that has supported us throughout our history.
-
-    The program includes several key components:
-    - Free football coaching sessions for underprivileged children
-    - Educational workshops on nutrition and healthy living
-    - School visits by club players and staff
-    - Community football tournaments
-    - Support for local sports facilities
-    - Mentorship programs for young athletes
-
-    The program will be implemented in partnership with local schools, community centers, and youth organizations. Our first-team players will actively participate in various activities, serving as role models for the younger generation.
-
-    The club's community relations manager stated, "This program is about more than just football. It's about using the power of sport to make a positive impact in our community and help young people develop important life skills."
-
-    The program has already received significant support from local businesses and sponsors, who recognize the importance of investing in the community's future. The first activities will begin next month, with plans to expand the program based on community feedback and needs.`,
+    date: {
+      en: "12H",
+      fa: "۱۲ ساعت پیش"
+    },
+    category: {
+      en: "COMMUNITY",
+      fa: "جامعه"
+    },
+    description: {
+      en: "The club launches a new community outreach program aimed at supporting local youth and promoting sports in the community.",
+      fa: "باشگاه یک برنامه جدید مشارکت اجتماعی را با هدف حمایت از جوانان محلی و ترویج ورزش در جامعه راه‌اندازی کرد."
+    },
+    keywords: [
+      { en: "community", fa: "جامعه" },
+      { en: "outreach", fa: "مشارکت" },
+      { en: "program", fa: "برنامه" }
+    ],
+    content: {
+      en: `The club is proud to announce the launch of a comprehensive community outreach program aimed at supporting local youth and promoting sports in the community. This initiative represents our commitment to giving back to the community that has supported us throughout our history.`,
+      fa: `باشگاه با افتخار از راه‌اندازی یک برنامه جامع مشارکت اجتماعی خبر می‌دهد که با هدف حمایت از جوانان محلی و ترویج ورزش در جامعه طراحی شده است. این ابتکار نشان‌دهنده تعهد ما برای بازگشت به جامعه‌ای است که در طول تاریخ از ما حمایت کرده است.`
+    },
     views: 450,
     likes: 56,
     dislikes: 1
   },
   {
     id: 6,
-    title: "Player Interview",
+    title: {
+      en: "Player Interview",
+      fa: "مصاحبه با بازیکن"
+    },
     image: "/images/banners/ArticlePicture2.png",
     type: "video",
-    date: "10H",
-    category: "FIRST TEAM",
-    description: "An exclusive interview with our star player about their journey, achievements, and future goals with the club.",
-    keywords: ["interview", "player", "first team"],
-    content: `In this exclusive interview, our star player shares insights about their journey with the club, recent achievements, and future goals. The interview covers their training routine, match preparation, and personal experiences in professional football.`,
+    date: {
+      en: "10H",
+      fa: "۱۰ ساعت پیش"
+    },
+    category: {
+      en: "FIRST TEAM",
+      fa: "تیم اول"
+    },
+    description: {
+      en: "An exclusive interview with our star player about their journey, achievements, and future goals with the club.",
+      fa: "مصاحبه اختصاصی با بازیکن ستاره ما درباره مسیر، دستاوردها و اهداف آینده‌اش در باشگاه."
+    },
+    keywords: [
+      { en: "interview", fa: "مصاحبه" },
+      { en: "player", fa: "بازیکن" },
+      { en: "first team", fa: "تیم اول" }
+    ],
+    content: {
+      en: `In this exclusive interview, our star player shares insights about their journey with the club, recent achievements, and future goals. The interview covers their training routine, match preparation, and personal experiences in professional football.`,
+      fa: `در این مصاحبه اختصاصی، بازیکن ستاره ما دیدگاه‌های خود را درباره مسیرش در باشگاه، دستاوردهای اخیر و اهداف آینده به اشتراک می‌گذارد. این مصاحبه شامل برنامه تمرینی، آماده‌سازی برای مسابقات و تجربیات شخصی او در فوتبال حرفه‌ای است.`
+    },
     views: 980,
     likes: 45,
     dislikes: 5
   },
   {
     id: 7,
-    title: "Season Highlights",
+    title: {
+      en: "Season Highlights",
+      fa: "برترین لحظات فصل"
+    },
     image: "/images/banners/ArticlePicture2.png",
     type: "video",
-    date: "10H",
-    category: "FIRST TEAM",
-    description: "Relive the most exciting moments from our team's successful season, including key goals, saves, and celebrations.",
-    keywords: ["highlights", "season", "review"],
-    content: `This video compilation showcases the most memorable moments from our team's successful season. From spectacular goals to crucial saves, these highlights capture the essence of our team's performance and achievements throughout the season.`,
+    date: {
+      en: "10H",
+      fa: "۱۰ ساعت پیش"
+    },
+    category: {
+      en: "FIRST TEAM",
+      fa: "تیم اول"
+    },
+    description: {
+      en: "Relive the most exciting moments from our team's successful season, including key goals, saves, and celebrations.",
+      fa: "لحظات هیجان‌انگیز فصل موفق تیم ما را مرور کنید، از گل‌های کلیدی گرفته تا دفاع‌های مهم و جشن‌ها."
+    },
+    keywords: [
+      { en: "highlights", fa: "برترین لحظات" },
+      { en: "season", fa: "فصل" },
+      { en: "review", fa: "مرور" }
+    ],
+    content: {
+      en: `This video compilation showcases the most memorable moments from our team's successful season. From spectacular goals to crucial saves, these highlights capture the essence of our team's performance and achievements throughout the season.`,
+      fa: `این مجموعه ویدیویی برترین لحظات فصل موفق تیم ما را به نمایش می‌گذارد. از گل‌های تماشایی گرفته تا دفاع‌های سرنوشت‌ساز، این برترین لحظات جوهره عملکرد و دستاوردهای تیم ما را در طول فصل به تصویر می‌کشد.`
+    },
     views: 1200,
     likes: 78,
     dislikes: 4
   },
   {
     id: 8,
-    title: "Stadium Tour: Behind the Scenes",
+    title: {
+      en: "Stadium Tour: Behind the Scenes",
+      fa: "گشت و گذار در ورزشگاه: پشت صحنه"
+    },
     image: "/images/banners/ArticlePicture2.png",
     type: "slideshow",
-    date: "5H",
-    category: "CLUB NEWS",
-    description: "Take an exclusive tour of our newly renovated stadium through this photo gallery showcasing the state-of-the-art facilities.",
-    keywords: ["stadium", "tour", "facilities"],
-    content: `Join us on a visual journey through our newly renovated stadium. This photo gallery showcases the state-of-the-art facilities that have been added to enhance the matchday experience for both players and fans.`,
+    date: {
+      en: "5H",
+      fa: "۵ ساعت پیش"
+    },
+    category: {
+      en: "CLUB NEWS",
+      fa: "اخبار باشگاه"
+    },
+    description: {
+      en: "Take an exclusive tour of our newly renovated stadium through this photo gallery showcasing the state-of-the-art facilities.",
+      fa: "با این گالری عکس از امکانات مدرن ورزشگاه بازسازی شده ما دیدن کنید."
+    },
+    keywords: [
+      { en: "stadium", fa: "ورزشگاه" },
+      { en: "tour", fa: "گشت و گذار" },
+      { en: "facilities", fa: "امکانات" }
+    ],
+    content: {
+      en: `Join us on a visual journey through our newly renovated stadium. This photo gallery showcases the state-of-the-art facilities that have been added to enhance the matchday experience for both players and fans.`,
+      fa: `به ما در سفر تصویری به ورزشگاه بازسازی شده جدیدمان بپیوندید. این گالری عکس امکانات مدرنی را که برای بهبود تجربه روز مسابقه برای بازیکنان و هواداران اضافه شده‌اند به نمایش می‌گذارد.`
+    },
     slideshowImages: [
       "/images/banners/ArticlePicture2.png",
       "/images/banners/ArticlePicture2.png",
@@ -173,19 +296,38 @@ export const newsData = [
       "/images/banners/ArticlePicture2.png"
     ],
     views: 850,
-    likes: 62,
+    likes: 67,
     dislikes: 3
   },
   {
     id: 9,
-    title: "Training Ground Evolution",
+    title: {
+      en: "Training Ground Evolution",
+      fa: "تکامل زمین تمرین"
+    },
     image: "/images/banners/ArticlePicture2.png",
     type: "slideshow",
-    date: "3H",
-    category: "FIRST TEAM",
-    description: "A visual journey through the evolution of our training facilities over the years, showcasing the improvements and modern additions.",
-    keywords: ["training", "facilities", "evolution"],
-    content: `Explore the transformation of our training facilities through this photo gallery. From humble beginnings to world-class facilities, see how our training ground has evolved to meet the needs of modern football.`,
+    date: {
+      en: "3H",
+      fa: "۳ ساعت پیش"
+    },
+    category: {
+      en: "FIRST TEAM",
+      fa: "تیم اول"
+    },
+    description: {
+      en: "A visual journey through the evolution of our training facilities over the years, showcasing the improvements and modern additions.",
+      fa: "سفری تصویری از تکامل امکانات تمرینی ما در طول سال‌ها، نمایش بهبودها و افزوده‌های مدرن."
+    },
+    keywords: [
+      { en: "training", fa: "تمرین" },
+      { en: "facilities", fa: "امکانات" },
+      { en: "evolution", fa: "تکامل" }
+    ],
+    content: {
+      en: `Explore the transformation of our training facilities through this photo gallery. From humble beginnings to world-class facilities, see how our training ground has evolved to meet the needs of modern football.`,
+      fa: `تغییر و تحول امکانات تمرینی ما را از طریق این گالری عکس کاوش کنید. از شروع ساده تا امکانات در سطح جهانی، ببینید چگونه زمین تمرین ما برای پاسخگویی به نیازهای فوتبال مدرن تکامل یافته است.`
+    },
     slideshowImages: [
       "/images/banners/ArticlePicture2.png",
       "/images/banners/ArticlePicture2.png",
@@ -200,70 +342,165 @@ export const newsData = [
   },
   {
     id: 10,
-    title: "Match Highlights: Team vs Rivals",
+    title: {
+      en: "Match Highlights: Team vs Rivals",
+      fa: "برترین لحظات بازی: تیم مقابل حریفان"
+    },
     image: "/images/banners/ArticlePicture2.png",
     type: "video",
-    date: "5H",
-    category: "FIRST TEAM",
-    description: "Watch the highlights from our thrilling match against our biggest rivals, featuring key moments and goals.",
-    keywords: ["highlights", "match", "goals"],
-    content: `Relive the excitement of our latest match against our biggest rivals. This video highlights the key moments, including spectacular goals, crucial saves, and the team's impressive performance throughout the game.`,
+    date: {
+      en: "5H",
+      fa: "۵ ساعت پیش"
+    },
+    category: {
+      en: "FIRST TEAM",
+      fa: "تیم اول"
+    },
+    description: {
+      en: "Watch the highlights from our thrilling match against our biggest rivals, featuring key moments and goals.",
+      fa: "برترین لحظات بازی هیجان‌انگیز ما مقابل بزرگترین حریفان را تماشا کنید، شامل لحظات کلیدی و گل‌ها."
+    },
+    keywords: [
+      { en: "highlights", fa: "برترین لحظات" },
+      { en: "match", fa: "بازی" },
+      { en: "goals", fa: "گل‌ها" }
+    ],
+    content: {
+      en: `Relive the excitement of our latest match against our biggest rivals. This video highlights the key moments, including spectacular goals, crucial saves, and the team's impressive performance throughout the game.`,
+      fa: `هیجان آخرین بازی ما مقابل بزرگترین حریفان را دوباره تجربه کنید. این ویدیو لحظات کلیدی را برجسته می‌کند، از گل‌های تماشایی گرفته تا دفاع‌های سرنوشت‌ساز و عملکرد چشمگیر تیم در طول بازی.`
+    },
     views: 2500,
     likes: 120,
     dislikes: 15
   },
   {
     id: 11,
-    title: "Behind the Scenes: Training Session",
+    title: {
+      en: "Behind the Scenes: Training Session",
+      fa: "پشت صحنه: جلسه تمرین"
+    },
     image: "/images/banners/ArticlePicture2.png",
     type: "video",
-    date: "8H",
-    category: "FIRST TEAM",
-    description: "An exclusive look at our team's training session, showing the hard work and dedication behind the scenes.",
-    keywords: ["training", "behind the scenes", "practice"],
-    content: `Get an exclusive look at our team's training session. This video shows the hard work, dedication, and team spirit that goes into preparing for our matches. Watch as our players work on their skills, tactics, and teamwork.`,
+    date: {
+      en: "8H",
+      fa: "۸ ساعت پیش"
+    },
+    category: {
+      en: "FIRST TEAM",
+      fa: "تیم اول"
+    },
+    description: {
+      en: "An exclusive look at our team's training session, showing the hard work and dedication behind the scenes.",
+      fa: "نگاهی اختصاصی به جلسه تمرین تیم ما، نمایش تلاش و فداکاری پشت صحنه."
+    },
+    keywords: [
+      { en: "training", fa: "تمرین" },
+      { en: "behind the scenes", fa: "پشت صحنه" },
+      { en: "practice", fa: "تمرین" }
+    ],
+    content: {
+      en: `Get an exclusive look at our team's training session. This video shows the hard work, dedication, and team spirit that goes into preparing for our matches. Watch as our players work on their skills, tactics, and teamwork.`,
+      fa: `نگاهی اختصاصی به جلسه تمرین تیم ما بیندازید. این ویدیو تلاش، فداکاری و روحیه تیمی را که برای آماده‌سازی مسابقات انجام می‌شود نشان می‌دهد. تماشا کنید که بازیکنان ما چگونه روی مهارت‌ها، تاکتیک‌ها و کار تیمی کار می‌کنند.`
+    },
     views: 1800,
     likes: 95,
     dislikes: 8
   },
   {
     id: 12,
-    title: "Player Interview: Star Striker",
+    title: {
+      en: "Player Interview: Star Striker",
+      fa: "مصاحبه با بازیکن: مهاجم ستاره"
+    },
     image: "/images/banners/ArticlePicture2.png",
     type: "video",
-    date: "12H",
-    category: "FIRST TEAM",
-    description: "An in-depth interview with our star striker about their journey, achievements, and future goals.",
-    keywords: ["interview", "player", "striker"],
-    content: `Join us for an exclusive interview with our star striker. In this video, they share insights about their journey with the club, recent achievements, and their goals for the future.`,
+    date: {
+      en: "12H",
+      fa: "۱۲ ساعت پیش"
+    },
+    category: {
+      en: "FIRST TEAM",
+      fa: "تیم اول"
+    },
+    description: {
+      en: "An in-depth interview with our star striker about their journey, achievements, and future goals.",
+      fa: "مصاحبه عمیق با مهاجم ستاره ما درباره مسیر، دستاوردها و اهداف آینده‌اش."
+    },
+    keywords: [
+      { en: "interview", fa: "مصاحبه" },
+      { en: "player", fa: "بازیکن" },
+      { en: "striker", fa: "مهاجم" }
+    ],
+    content: {
+      en: `Join us for an exclusive interview with our star striker. In this video, they share insights about their journey with the club, recent achievements, and their goals for the future.`,
+      fa: `در مصاحبه اختصاصی با مهاجم ستاره ما شرکت کنید. در این ویدیو، او دیدگاه‌های خود را درباره مسیرش در باشگاه، دستاوردهای اخیر و اهداف آینده‌اش به اشتراک می‌گذارد.`
+    },
     views: 3200,
     likes: 150,
     dislikes: 20
   },
   {
     id: 13,
-    title: "Youth Team: Future Stars",
+    title: {
+      en: "Youth Team: Future Stars",
+      fa: "تیم جوانان: ستاره‌های آینده"
+    },
     image: "/images/banners/ArticlePicture2.png",
     type: "video",
-    date: "15H",
-    category: "YOUTH TEAM",
-    description: "Meet the promising young talents from our youth academy who are making waves in the development squad.",
-    keywords: ["youth", "academy", "talent"],
-    content: `Meet the promising young talents from our youth academy. This video showcases the skills and potential of our development squad players who are making waves in youth competitions.`,
+    date: {
+      en: "15H",
+      fa: "۱۵ ساعت پیش"
+    },
+    category: {
+      en: "YOUTH TEAM",
+      fa: "تیم جوانان"
+    },
+    description: {
+      en: "Meet the promising young talents from our youth academy who are making waves in the development squad.",
+      fa: "با استعدادهای جوان امیدوارکننده از آکادمی جوانان ما که در تیم توسعه موج‌آفرینی می‌کنند آشنا شوید."
+    },
+    keywords: [
+      { en: "youth", fa: "جوانان" },
+      { en: "academy", fa: "آکادمی" },
+      { en: "talent", fa: "استعداد" }
+    ],
+    content: {
+      en: `Meet the promising young talents from our youth academy. This video showcases the skills and potential of our development squad players who are making waves in youth competitions.`,
+      fa: `با استعدادهای جوان امیدوارکننده از آکادمی جوانان ما آشنا شوید. این ویدیو مهارت‌ها و پتانسیل بازیکنان تیم توسعه ما را که در مسابقات جوانان موج‌آفرینی می‌کنند به نمایش می‌گذارد.`
+    },
     views: 1500,
     likes: 80,
     dislikes: 5
   },
   {
     id: 14,
-    title: "Tactical Analysis: Last Match",
+    title: {
+      en: "Tactical Analysis: Last Match",
+      fa: "تحلیل تاکتیکی: آخرین بازی"
+    },
     image: "/images/banners/ArticlePicture2.png",
     type: "video",
-    date: "20H",
-    category: "FIRST TEAM",
-    description: "Our coach breaks down the tactics and key moments from our last match in this detailed analysis.",
-    keywords: ["tactics", "analysis", "coach"],
-    content: `Join our head coach for a detailed tactical analysis of our last match. This video breaks down the key moments, strategies, and decisions that shaped the game's outcome.`,
+    date: {
+      en: "20H",
+      fa: "۲۰ ساعت پیش"
+    },
+    category: {
+      en: "FIRST TEAM",
+      fa: "تیم اول"
+    },
+    description: {
+      en: "Our coach breaks down the tactics and key moments from our last match in this detailed analysis.",
+      fa: "مربی ما تاکتیک‌ها و لحظات کلیدی آخرین بازی ما را در این تحلیل دقیق بررسی می‌کند."
+    },
+    keywords: [
+      { en: "tactics", fa: "تاکتیک" },
+      { en: "analysis", fa: "تحلیل" },
+      { en: "coach", fa: "مربی" }
+    ],
+    content: {
+      en: `Join our head coach for a detailed tactical analysis of our last match. This video breaks down the key moments, strategies, and decisions that shaped the game's outcome.`,
+      fa: `به سر مربی ما برای تحلیل تاکتیکی دقیق آخرین بازی ما بپیوندید. این ویدیو لحظات کلیدی، استراتژی‌ها و تصمیماتی که نتیجه بازی را شکل دادند را بررسی می‌کند.`
+    },
     views: 2800,
     likes: 110,
     dislikes: 12
