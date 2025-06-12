@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 export default function Error() {
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.language === 'fa';
+
   return (
     <div className="min-h-screen bg-quinary-tint-600 flex items-center justify-center px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
       <div className="w-full max-w-[1300px] bg-quinary-tint-900 rounded-2xl shadow-[0_0_16px_rgba(0,0,0,0.25)] p-6 sm:p-8 md:p-12">
@@ -24,11 +28,11 @@ export default function Error() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mt-2 sm:mt-4"
           >
-            <h2 className="text-[24px] sm:text-[32px] md:text-[40px] lg:text-[48px] font-semibold text-secondary mb-2 sm:mb-4">
-              Page Not Found
+            <h2 className={`text-[24px] sm:text-[32px] md:text-[40px] lg:text-[48px] font-semibold text-secondary mb-2 sm:mb-4 ${isRTL ? 'text-right' : 'text-left'}`}>
+              {t('errorPageNotFound')}
             </h2>
-            <p className="text-[16px] sm:text-[18px] md:text-[20px] text-secondary-tint-500 mb-6 sm:mb-8">
-              The page you are looking for doesn't exist or has been moved.
+            <p className={`text-[16px] sm:text-[18px] md:text-[20px] text-secondary-tint-500 mb-6 sm:mb-8 ${isRTL ? 'text-right' : 'text-left'}`}>
+              {t('errorPageDescription')}
             </p>
           </motion.div>
 
@@ -42,7 +46,7 @@ export default function Error() {
               to="/"
               className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-primary text-quinary-tint-800 text-[16px] sm:text-[18px] md:text-[20px] font-semibold rounded-lg hover:opacity-90 transition-opacity"
             >
-              Back to Home
+              {t('errorBackToHome')}
             </Link>
           </motion.div>
 

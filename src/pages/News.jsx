@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import NewsFilter from '../components/NewsFilter'
 import NewsBox from '../components/NewsBox'
 import { newsData } from '../data/newsData'
@@ -9,6 +10,8 @@ export default function News() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [displayCount, setDisplayCount] = useState(6);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.language === 'fa';
 
   useEffect(() => {
     const handleResize = () => {
@@ -79,7 +82,7 @@ export default function News() {
               onClick={handleLearnMore}
               className="px-6 py-2 sm:px-8 sm:py-3 bg-quinary-tint-800 hover:bg-quinary-tint-700 rounded-lg text-secondary hover:text-quaternary transition-colors duration-300"
             >
-              <span className="text-[16px] sm:text-[18px] md:text-[20px] font-medium">Load More</span>
+              <span className="text-[16px] sm:text-[18px] md:text-[20px] font-medium">{t('newsLoadMore')}</span>
             </button>
           </div>
         )}

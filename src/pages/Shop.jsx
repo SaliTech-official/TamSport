@@ -1,9 +1,12 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 export default function Shop() {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.language === 'fa';
 
   return (
     <div className="min-h-screen">
@@ -16,10 +19,10 @@ export default function Shop() {
             className="text-center"
           >
             <h1 className="text-[32px] sm:text-[40px] md:text-[48px] font-bold text-primary mb-2 sm:mb-3 md:mb-4">
-              Coming Soon
+              {t('shopPageComingSoon')}
             </h1>
             <p className="text-[18px] sm:text-[20px] md:text-[24px] text-secondary-tint-500 mb-6 sm:mb-7 md:mb-8">
-              We're preparing something special for you
+              {t('shopPagePreparing')}
             </p>
           </motion.div>
 
@@ -39,10 +42,10 @@ export default function Shop() {
             className="text-center"
           >
             <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-medium text-primary mb-4 sm:mb-5 md:mb-6">
-              TamSport Shop
+              {t('shopPageTitle')}
             </h2>
-            <p className="text-[16px] sm:text-[18px] md:text-[20px] text-secondary max-w-2xl mx-auto mb-8 sm:mb-10 md:mb-12 px-4">
-              Our online store is currently under development. We're working hard to bring you the best selection of team merchandise and exclusive items.
+            <p className={`text-[16px] sm:text-[18px] md:text-[20px] text-secondary max-w-2xl mx-auto mb-8 sm:mb-10 md:mb-12 px-4 ${isRTL ? 'text-right' : 'text-left'}`}>
+              {t('shopPageDescription')}
             </p>
           </motion.div>
 
@@ -56,7 +59,7 @@ export default function Shop() {
               onClick={() => navigate('/')}
               className="px-6 sm:px-8 py-2 sm:py-3 bg-primary text-white text-[16px] sm:text-[18px] font-medium rounded-lg hover:bg-primary-tint-500 transition-colors duration-300"
             >
-              Back to Home
+              {t('shopPageBackToHome')}
             </button>
           </motion.div>
         </div>

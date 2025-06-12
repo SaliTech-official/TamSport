@@ -1,8 +1,9 @@
-import React, { useState, useContext, useEffect, useCallback, useMemo, useReducer } from 'react'
+import React, { useState, useEffect, useCallback, useMemo, useReducer } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AuthContext } from '../App'
 import { fakeUsers } from '../data/fakeUsers'
 import Modal from '../components/Modal'
+import { useTranslation } from 'react-i18next'
+import { useAuth } from '../contexts/AuthContext'
 
 // Validation functions
 const validatePhone = (phone) => {
@@ -195,6 +196,11 @@ const Button = React.memo(({ onClick, children, variant = 'primary', className =
 })
 
 export default function Login() {
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.language === 'fa';
+  const { login, register: registerUser, user, setUser, clearAllData } = useAuth();
+  const navigate = useNavigate();
+  
   // Login states
   const [loginState, setLoginState] = useState({
     phone: '',
@@ -232,8 +238,6 @@ export default function Login() {
   const otpInputs = [0, 1, 2, 3, 4]
   const otpRefs = useMemo(() => otpInputs.map(() => React.createRef()), [])
   const OTP_CODE = '12345'
-  const navigate = useNavigate()
-  const { setUser } = useContext(AuthContext)
 
   // Memoized validation
   const registerValidation = useMemo(() => ({
@@ -254,7 +258,7 @@ export default function Login() {
       setUser(JSON.parse(rememberedUser))
       navigate('/')
     }
-  }, [])
+  }, [setUser, navigate])
 
   useEffect(() => {
     if (!otpState.step) return
@@ -277,30 +281,31 @@ export default function Login() {
     dispatchRegister({ type: 'VALIDATE' })
   }, [isRegister, registerState.phone, registerState.password, registerState.confirm])
 
-  const handleLogin = useCallback((e) => {
-    e.preventDefault()
-    const user = fakeUsers.find(u => u.phone === loginState.phone && u.password === loginState.password)
-    if (user) {
-      setUser({ phone: user.phone })
+  const handleLogin = useCallback(async (e) => {
+    e.preventDefault();
+    const success = await login(loginState.phone, loginState.password);
+    if (success) {
       if (loginState.rememberMe) {
-        localStorage.setItem('rememberedUser', JSON.stringify({ phone: user.phone }))
+        localStorage.setItem('rememberedUser', JSON.stringify({ phone: loginState.phone }));
       } else {
-        localStorage.removeItem('rememberedUser')
+        localStorage.removeItem('rememberedUser');
       }
-      setIsModalOpen(true)
-      setLoginState(prev => ({ ...prev, error: false }))
+      setIsModalOpen(true);
+      setLoginState(prev => ({ ...prev, error: false }));
     } else {
-      setLoginState(prev => ({ ...prev, error: true }))
+      setLoginState(prev => ({ ...prev, error: true }));
     }
-  }, [loginState.phone, loginState.password, loginState.rememberMe, setUser])
+  }, [loginState.phone, loginState.password, loginState.rememberMe, login]);
 
-  const handleRegister = useCallback((e) => {
-    e.preventDefault()
-    if (registerValidation.hasErrors()) return
+  const handleRegister = useCallback(async (e) => {
+    e.preventDefault();
+    if (registerValidation.hasErrors()) return;
     
-    fakeUsers.push({ phone: registerState.phone, password: registerState.password })
-    dispatchOtp({ type: 'SET_STEP', value: true })
-  }, [registerState, registerValidation])
+    const success = await registerUser(registerState.phone, registerState.password);
+    if (success) {
+      dispatchOtp({ type: 'SET_STEP', value: true });
+    }
+  }, [registerState, registerValidation, registerUser]);
 
   const handleOtpSubmit = useCallback((e) => {
     e.preventDefault()
@@ -373,7 +378,7 @@ export default function Login() {
         </button>
       </div>
 
-      <Button onClick={handleLogin} className="mt-8">LOGIN</Button>
+      <Button onClick={handleLogin} className="mt-8">{t('login')}</Button>
 
       <div className="flex items-center w-[400px] mt-8">
         <div className="h-[1px] w-[180px] bg-primary opacity-40" />
@@ -397,34 +402,34 @@ export default function Login() {
           navigate('/')
         }}
         data={{
-          title: 'Login Successful',
-          content: 'You have successfully logged in!',
+          title: t('loginSuccessTitle'),
+          content: t('loginSuccessContent'),
           onlyAcceptable: true
         }}
       />
       <div className="w-[95%] max-w-[1200px] h-[600px] mx-auto mt-8 flex flex-col lg:flex-row shadow-[4px_4px_16px_0_rgba(0,0,0,0.25)] rounded-2xl">
         {/* Welcome Section - Hidden on mobile */}
-        <div className="hidden lg:block w-[780px] h-full bg-gradient-to-br from-primary to-quaternary relative rounded-l-2xl">
-          <div className="absolute top-[96px] left-[64px]">
+        <div className={`hidden lg:block w-[780px] h-full bg-gradient-to-br from-primary to-quaternary relative rounded-l-2xl ${isRTL ? 'order-2' : 'order-1'}`}>
+          <div className={`absolute top-[96px] ${isRTL ? 'right-[64px]' : 'left-[64px]'}`}>
             <h1 className="text-[48px] font-bold text-quinary-tint-800">
-              Welcome To Website
+              {t('loginWelcomeTitle')}
             </h1>
             <p className="text-[24px] font-normal text-quinary-tint-800 mt-4 max-w-[600px]">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Egestas purus viverra accumsan in nisl nisi Arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque ...
+              {t('loginWelcomeDescription')}
             </p>
           </div>
         </div>
 
-        <div className="w-full lg:w-[520px] h-full bg-quinary-tint-800 rounded-2xl lg:rounded-r-2xl lg:rounded-l-none flex flex-col items-center p-4 sm:p-8">
+        <div className={`w-full lg:w-[520px] h-full bg-quinary-tint-800 rounded-2xl lg:rounded-r-2xl lg:rounded-l-none flex flex-col items-center p-4 sm:p-8 ${isRTL ? 'order-1 lg:rounded-l-2xl lg:rounded-r-none' : 'order-2'}`}>
           {isRegister ? (
             otpState.step ? (
               <>
-                <h2 className="text-[28px] sm:text-[36px] font-bold text-primary mt-[32px]">OTP Verification</h2>
+                <h2 className="text-[28px] sm:text-[36px] font-bold text-primary mt-[32px]">{t('otpVerification')}</h2>
                 <div className="w-full max-w-[400px] mt-[32px] flex flex-col items-center">
-                  <span className="text-[16px] sm:text-[18px] text-primary mb-4">Enter the code sent to your phone</span>
+                  <span className="text-[16px] sm:text-[18px] text-primary mb-4">{t('otpEnterCode')}</span>
                   <form id="otp-form" onSubmit={handleOtpSubmit} className="w-full flex flex-col items-center">
                     {/* OTP Inputs */}
-                    <div className="flex justify-center gap-2 sm:gap-4 mb-4">
+                    <div className={`flex ${isRTL ? 'flex-row-reverse' : 'flex-row'} justify-center gap-2 sm:gap-4 mb-4`}>
                       {otpInputs.map((idx) => (
                         <input
                           key={idx}
@@ -432,6 +437,7 @@ export default function Login() {
                           type="text"
                           inputMode="numeric"
                           maxLength={1}
+                          dir="ltr"
                           className="w-10 h-12 sm:w-12 sm:h-14 text-center text-[24px] sm:text-[28px] font-bold rounded-xl border-2 border-quaternary-tint-800 bg-quaternary-tint-800 text-primary focus:border-primary outline-none transition-all duration-200 shadow-[2px_2px_8px_0_rgba(0,0,0,0.10)]"
                           value={otpState.digits[idx]}
                           onChange={e => handleOtpDigitChange(idx, e.target.value)}
@@ -440,9 +446,9 @@ export default function Login() {
                       ))}
                     </div>
                     {otpState.error && (
-                      <div className="flex items-center ml-2 sm:ml-4">
+                      <div className={`flex items-center ${isRTL ? 'mr-2 sm:mr-4' : 'ml-2 sm:ml-4'}`}>
                         <Icons.Error />
-                        <span className="ml-1 text-[14px] sm:text-[16px] font-normal text-quaternary">{otpState.error}</span>
+                        <span className={`${isRTL ? 'mr-1' : 'ml-1'} text-[14px] sm:text-[16px] font-normal text-quaternary`}>{t('invalidOtpCode')}</span>
                       </div>
                     )}
                     {/* Timer */}
@@ -464,31 +470,31 @@ export default function Login() {
                           {Math.floor(otpState.timer/60).toString().padStart(2,'0')}:{(otpState.timer%60).toString().padStart(2,'0')}
                         </span>
                       </div>
-                      <button type="button" onClick={handleResendOtp} disabled={!otpState.resendActive} className={`mt-2 text-primary text-[14px] sm:text-[16px] font-semibold transition-opacity ${otpState.resendActive ? '' : 'opacity-40 cursor-not-allowed'}`}>Resend Code</button>
+                      <button type="button" onClick={handleResendOtp} disabled={!otpState.resendActive} className={`mt-2 text-primary text-[14px] sm:text-[16px] font-semibold transition-opacity ${otpState.resendActive ? '' : 'opacity-40 cursor-not-allowed'}`}>{t('resendCode')}</button>
                     </div>
-                    <button type="submit" className="w-[150px] h-[39px] mt-[32px] bg-gradient-to-br from-primary to-quaternary rounded-[45px] text-white text-[16px] font-semibold flex items-center justify-center transition-all duration-300 hover:from-quaternary hover:to-primary">Verify</button>
+                    <button type="submit" className="w-[150px] h-[39px] mt-[32px] bg-gradient-to-br from-primary to-quaternary rounded-[45px] text-white text-[16px] font-semibold flex items-center justify-center transition-all duration-300 hover:from-quaternary hover:to-primary">{t('verify')}</button>
                   </form>
                 </div>
               </>
             ) : (
               <>
-                <h2 className="text-[28px] sm:text-[36px] font-bold text-primary mt-[32px]">User Register</h2>
+                <h2 className="text-[28px] sm:text-[36px] font-bold text-primary mt-[32px]">{t('userRegister')}</h2>
                 <div className="w-full max-w-[400px] flex flex-col items-center">
                   {/* Phone Input */}
                   <Input
                     icon={Icons.User}
                     type="text"
-                    placeholder="Phone Number"
+                    placeholder={t('phoneNumber')}
                     value={registerState.phone}
                     onChange={e => dispatchRegister({ type: 'SET_FIELD', field: 'phone', value: e.target.value })}
                   />
-                  {registerState.phoneError && <ErrorMessage message={registerState.phoneError} />}
+                  {registerState.phoneError && <ErrorMessage message={t('invalidPhoneNumber')} />}
 
                   {/* Password Input */}
                   <Input
                     icon={Icons.Lock}
                     type={registerState.showPassword ? 'text' : 'password'}
-                    placeholder="Password"
+                    placeholder={t('password')}
                     value={registerState.password}
                     onChange={e => dispatchRegister({ type: 'SET_FIELD', field: 'password', value: e.target.value })}
                     showPassword={registerState.showPassword}
@@ -499,7 +505,7 @@ export default function Login() {
                   <Input
                     icon={Icons.Lock}
                     type={registerState.showConfirmPassword ? 'text' : 'password'}
-                    placeholder="Confirm Password"
+                    placeholder={t('confirmPassword')}
                     value={registerState.confirm}
                     onChange={e => dispatchRegister({ type: 'SET_FIELD', field: 'confirm', value: e.target.value })}
                     showPassword={registerState.showConfirmPassword}
@@ -511,44 +517,44 @@ export default function Login() {
                     {(() => {
                       const errors = [];
                       if (registerState.confirmError) errors.push(
-                        <ErrorMessage key="confirm" message={registerState.confirmError} />
+                        <ErrorMessage key="confirm" message={t('passwordsDoNotMatch')} />
                       );
                       if (registerState.passwordLengthError) errors.push(
-                        <ErrorMessage key="length" message={registerState.passwordLengthError} />
+                        <ErrorMessage key="length" message={t('passwordLengthError')} />
                       );
                       if (registerState.passwordContentError) errors.push(
-                        <ErrorMessage key="content" message={registerState.passwordContentError} />
+                        <ErrorMessage key="content" message={t('passwordContentError')} />
                       );
                       return errors.slice(0, 2);
                     })()}
                   </div>
 
                   {/* Register Button */}
-                  <Button onClick={handleRegister} className="mt-[16px]">Register</Button>
+                  <Button onClick={handleRegister} className="mt-[16px]">{t('register')}</Button>
 
                   {/* OR Separator */}
                   <div className="flex items-center w-full mt-[24px]">
                     <div className="h-[1px] flex-1 bg-primary opacity-40" />
-                    <span className="mx-4 text-[20px] sm:text-[24px] font-light text-primary">OR</span>
+                    <span className="mx-4 text-[20px] sm:text-[24px] font-light text-primary">{t('or')}</span>
                     <div className="h-[1px] flex-1 bg-primary opacity-40" />
                   </div>
 
                   {/* Login Row */}
                   <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-4 mt-[16px]">
-                    <span className="text-[16px] sm:text-[20px] font-semibold text-primary">Already have an account?</span>
-                    <Button onClick={() => setIsRegister(false)} variant="secondary">Login</Button>
+                    <span className="text-[16px] sm:text-[20px] font-semibold text-primary">{t('alreadyHaveAccount')}</span>
+                    <Button onClick={() => setIsRegister(false)} variant="secondary">{t('login')}</Button>
                   </div>
                 </div>
               </>
             )
           ) : (
             <>
-              <h2 className="text-[28px] sm:text-[36px] font-bold text-primary mt-[32px]">User Login</h2>
+              <h2 className="text-[28px] sm:text-[36px] font-bold text-primary mt-[32px]">{t('userLogin')}</h2>
               <div className="w-full max-w-[400px] flex flex-col items-center">
                 <Input
                   icon={Icons.User}
                   type="text"
-                  placeholder="Phone Number"
+                  placeholder={t('phoneNumber')}
                   value={loginState.phone}
                   onChange={e => setLoginState(prev => ({ ...prev, phone: e.target.value }))}
                 />
@@ -556,42 +562,42 @@ export default function Login() {
                 <Input
                   icon={Icons.Lock}
                   type={loginState.showPassword ? "text" : "password"}
-                  placeholder="Password"
+                  placeholder={t('password')}
                   value={loginState.password}
                   onChange={e => setLoginState(prev => ({ ...prev, password: e.target.value }))}
                   showPassword={loginState.showPassword}
                   onTogglePassword={() => setLoginState(prev => ({ ...prev, showPassword: !prev.showPassword }))}
                 />
 
-                {loginState.error && <ErrorMessage message="Phone number or password is incorrect" />}
+                {loginState.error && <ErrorMessage message={t('invalidCredentials')} />}
 
                 <div className="w-full flex flex-col sm:flex-row justify-between items-center mt-4">
                   <div className="flex items-center">
                     <button onClick={() => setLoginState(prev => ({ ...prev, rememberMe: !prev.rememberMe }))} className="text-primary">
                       {loginState.rememberMe ? <Icons.Checked /> : <Icons.Unchecked />}
                     </button>
-                    <span className="ml-2 text-[14px] sm:text-[16px] text-primary">Remember me</span>
+                    <span className="ml-2 text-[14px] sm:text-[16px] text-primary">{t('rememberMe')}</span>
                   </div>
                   <button 
                     onClick={() => setIsModalOpen(true)}
                     className="text-[14px] sm:text-[16px] text-primary hover:text-quaternary transition-colors duration-300 mt-2 sm:mt-0"
                   >
-                    Forgot Password?
+                    {t('forgotPassword')}
                   </button>
                 </div>
 
-                <Button onClick={handleLogin} className="mt-8">LOGIN</Button>
+                <Button onClick={handleLogin} className="mt-8">{t('login')}</Button>
 
                 {/* OR Separator */}
                 <div className="flex items-center w-full mt-8">
                   <div className="h-[1px] flex-1 bg-primary opacity-40" />
-                  <span className="mx-4 text-[20px] sm:text-[24px] font-light text-primary">OR</span>
+                  <span className="mx-4 text-[20px] sm:text-[24px] font-light text-primary">{t('or')}</span>
                   <div className="h-[1px] flex-1 bg-primary opacity-40" />
                 </div>
 
                 <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
-                  <span className="text-[16px] sm:text-[20px] font-semibold text-primary">Don't have an account?</span>
-                  <Button onClick={() => setIsRegister(true)} variant="secondary">Register</Button>
+                  <span className="text-[16px] sm:text-[20px] font-semibold text-primary">{t('dontHaveAccount')}</span>
+                  <Button onClick={() => setIsRegister(true)} variant="secondary">{t('register')}</Button>
                 </div>
               </div>
             </>
