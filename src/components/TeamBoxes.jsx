@@ -1,15 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const TeamBoxes = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.language === 'fa';
+  const totalSlides = 7; // کاهش تعداد اسلایدها
+  const slidesPerView = 5;
+
+  // ریست کردن اسلاید وقتی زبان تغییر می‌کند
+  useEffect(() => {
+    setCurrentSlide(0);
+  }, [i18n.language]);
+
+  const handlePrevSlide = () => {
+    setCurrentSlide(prev => (prev - 1 + totalSlides) % totalSlides);
+  };
+
+  const handleNextSlide = () => {
+    setCurrentSlide(prev => (prev + 1) % totalSlides);
+  };
+
+  // محاسبه ترنسفورم برای اسلاید
+  const getTransform = () => {
+    const slideWidth = 220;
+    const offset = currentSlide * slideWidth;
+    return isRTL ? offset : -offset;
+  };
 
   return (
     <>
       <div className="w-full max-w-[1300px] mx-auto mt-8 flex flex-row justify-between items-center px-2 sm:px-4">
-        <h2 className="text-[28px] sm:text-[36px] md:text-[48px] font-regular text-secondary order-1">TAM'S TEAM</h2>
+        <h2 className="text-[28px] sm:text-[36px] md:text-[48px] font-regular text-secondary order-1">{t('tamsTeam')}</h2>
         <div className="flex items-center gap-2 sm:gap-4 mt-2 lg:mt-0 order-2">
           <button 
-            onClick={() => setCurrentSlide(prev => Math.max(0, prev - 1))}
+            onClick={handlePrevSlide}
             className="w-8 h-8 sm:w-12 sm:h-12 rounded-full hover:bg-secondary-tint-800 transition-colors duration-300 flex items-center justify-center group"
           >
             <svg 
@@ -18,7 +43,7 @@ const TeamBoxes = () => {
               viewBox="0 0 24 24" 
               strokeWidth={1.5} 
               stroke="currentColor" 
-              className="w-4 h-4 sm:w-6 sm:h-6 text-secondary group-hover:text-secondary-tint-200 transition-colors duration-300"
+              className={`w-4 h-4 sm:w-6 sm:h-6 text-secondary group-hover:text-secondary-tint-200 transition-colors duration-300 ${isRTL ? 'rotate-180' : ''}`}
             >
               <path 
                 strokeLinecap="round" 
@@ -28,7 +53,7 @@ const TeamBoxes = () => {
             </svg>
           </button>
           <button 
-            onClick={() => setCurrentSlide(prev => Math.min(6, prev + 1))}
+            onClick={handleNextSlide}
             className="w-8 h-8 sm:w-12 sm:h-12 rounded-full hover:bg-secondary-tint-800 transition-colors duration-300 flex items-center justify-center group"
           >
             <svg 
@@ -37,7 +62,7 @@ const TeamBoxes = () => {
               viewBox="0 0 24 24" 
               strokeWidth={1.5} 
               stroke="currentColor" 
-              className="w-4 h-4 sm:w-6 sm:h-6 text-secondary group-hover:text-secondary-tint-200 transition-colors duration-300"
+              className={`w-4 h-4 sm:w-6 sm:h-6 text-secondary group-hover:text-secondary-tint-200 transition-colors duration-300 ${isRTL ? 'rotate-180' : ''}`}
             >
               <path 
                 strokeLinecap="round" 
@@ -49,14 +74,24 @@ const TeamBoxes = () => {
         </div>
       </div>
 
-      <div className="w-full max-w-[1300px] mx-auto mt-4 overflow-x-auto px-2 sm:px-4 scrollbar-hide">
-        <div className="flex min-w-[600px] sm:min-w-0 overflow-x-auto scrollbar-hide">
+      <div className="w-full max-w-[1300px] mx-auto mt-4 overflow-hidden px-2 sm:px-4">
+        <div className="relative">
           <div 
             className="flex transition-transform duration-300 ease-in-out"
-            style={{ transform: `translateX(-${currentSlide * 220}px)` }}
+            style={{ 
+              transform: `translateX(${getTransform()}px)`,
+              direction: isRTL ? 'rtl' : 'ltr'
+            }}
           >
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((index) => (
-              <div key={index} className="relative w-[140px] sm:w-[200px] h-[220px] sm:h-[340px] rounded-[16px] overflow-hidden group cursor-pointer flex-shrink-0 mr-3 sm:mr-5">
+              <div 
+                key={index} 
+                className={`relative w-[140px] sm:w-[200px] h-[220px] sm:h-[340px] rounded-[16px] overflow-hidden group cursor-pointer flex-shrink-0 ${
+                  isRTL 
+                    ? 'ml-1.5 sm:ml-2.5' 
+                    : 'mr-1.5 sm:mr-2.5'
+                }`}
+              >
                 <div className="absolute inset-0">
                   <img 
                     src="/images/banners/ArticlePicture.png" 
@@ -65,14 +100,14 @@ const TeamBoxes = () => {
                   />
                 </div>
                 <div className="absolute bottom-2 sm:bottom-3 left-1.5 right-1.5 flex items-center justify-center gap-1.5">
-                  <span className="text-[14px] sm:text-[24px] font-bold text-quinary-tint-800">FOOTBALL</span>
+                  <span className="text-[14px] sm:text-[24px] font-bold text-quinary-tint-800">{t('football')}</span>
                   <svg 
                     xmlns="http://www.w3.org/2000/svg" 
                     fill="none" 
                     viewBox="0 0 24 24" 
                     strokeWidth={1.5} 
                     stroke="currentColor" 
-                    className="w-4 h-4 sm:w-6 sm:h-6 text-quinary-tint-800"
+                    className={`w-4 h-4 sm:w-6 sm:h-6 text-quinary-tint-800 ${isRTL ? 'rotate-180' : ''}`}
                   >
                     <path 
                       strokeLinecap="round" 

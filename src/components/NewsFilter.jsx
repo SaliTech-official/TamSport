@@ -1,14 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const NewsFilter = ({ activeFilter, onFilterChange }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const menuRef = useRef(null);
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.language === 'fa';
 
   const filters = [
-    { id: 'all', label: 'All' },
-    { id: 'basic', label: 'Articles' },
-    { id: 'video', label: 'Videos' },
-    { id: 'slideshow', label: 'Slideshows' }
+    { id: 'all', label: t('newsAll') },
+    { id: 'basic', label: t('newsArticles') },
+    { id: 'video', label: t('newsVideos') },
+    { id: 'slideshow', label: t('newsSlideshows') }
   ];
 
   useEffect(() => {
@@ -35,7 +38,7 @@ const NewsFilter = ({ activeFilter, onFilterChange }) => {
         className="sm:hidden w-full flex items-center justify-between px-4 py-2 bg-quinary-tint-800 rounded-lg text-secondary shadow-[0_4px_12px_rgba(0,0,0,0.15)] hover:shadow-[0_6px_16px_rgba(0,0,0,0.2)] transition-shadow duration-300"
       >
         <span className="text-[16px] font-medium">
-          {filters.find(f => f.id === activeFilter)?.label || 'Filter'}
+          {filters.find(f => f.id === activeFilter)?.label || t('newsAll')}
         </span>
         <svg
           xmlns="http://www.w3.org/2000/svg"

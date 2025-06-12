@@ -1,11 +1,16 @@
 import React from 'react';
 import PlayerBoxes from './PlayerBoxes';
+import { useTranslation } from 'react-i18next';
 
 const PlayerSection = () => {
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.language === 'fa';
+
   return (
     <>
       <div className="w-full max-w-[1300px] mx-auto mt-8 flex flex-row justify-between items-center px-2 sm:px-4 relative">
-        <h2 className="text-[28px] sm:text-[32px] md:text-[40px] font-bold text-secondary">PLAYER</h2>
+        <div className="flex-1"></div>
+        <h2 className="text-[28px] sm:text-[32px] md:text-[40px] font-bold text-secondary absolute left-1/2 transform -translate-x-1/2">{t('player')}</h2>
         <div className="flex items-center gap-2 sm:gap-4">
           <button 
             onClick={() => document.dispatchEvent(new CustomEvent('prevSlide'))}
@@ -17,7 +22,7 @@ const PlayerSection = () => {
               viewBox="0 0 24 24" 
               strokeWidth={1.5} 
               stroke="currentColor" 
-              className="w-4 h-4 sm:w-6 sm:h-6 text-secondary group-hover:text-secondary-tint-200 transition-colors duration-300"
+              className={`w-4 h-4 sm:w-6 sm:h-6 text-secondary group-hover:text-secondary-tint-200 transition-colors duration-300 ${isRTL ? 'rotate-180' : ''}`}
             >
               <path 
                 strokeLinecap="round" 
@@ -36,7 +41,7 @@ const PlayerSection = () => {
               viewBox="0 0 24 24" 
               strokeWidth={1.5} 
               stroke="currentColor" 
-              className="w-4 h-4 sm:w-6 sm:h-6 text-secondary group-hover:text-secondary-tint-200 transition-colors duration-300"
+              className={`w-4 h-4 sm:w-6 sm:h-6 text-secondary group-hover:text-secondary-tint-200 transition-colors duration-300 ${isRTL ? 'rotate-180' : ''}`}
             >
               <path 
                 strokeLinecap="round" 

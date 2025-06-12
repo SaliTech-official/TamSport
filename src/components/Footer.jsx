@@ -1,52 +1,55 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { scrollToSection, navigateToNewsWithFilter, scrollToAboutSection } from '../utils/navigation';
 
 const Footer = () => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.language === 'fa';
   
   const footerColumns = [
     {
-      title: 'Home',
+      title: t('footerHome'),
       items: [
-        { label: 'Latest News', sectionId: 'latest-news' },
-        { label: "Tam's Team", sectionId: 'team-boxes' },
-        { label: "Tam's Shop", sectionId: 'shop-section' },
-        { label: 'Players', sectionId: 'player-section' }
+        { label: t('footerLatestNews'), sectionId: 'latest-news' },
+        { label: t('footerTamsTeam'), sectionId: 'team-boxes' },
+        { label: t('footerTamsShop'), sectionId: 'shop-section' },
+        { label: t('footerPlayers'), sectionId: 'player-section' }
       ]
     },
     {
-      title: "News",
+      title: t('footerNews'),
       items: [
-        { label: "All Content", filter: "all" },
-        { label: "Article Content", filter: "basic" },
-        { label: "Video Content", filter: "video" },
-        { label: "Slideshow Content", filter: "slideshow" }
+        { label: t('footerAllContent'), filter: "all" },
+        { label: t('footerArticleContent'), filter: "basic" },
+        { label: t('footerVideoContent'), filter: "video" },
+        { label: t('footerSlideshowContent'), filter: "slideshow" }
       ]
     },
     {
-      title: 'Shop',
+      title: t('footerShop'),
       items: [
-        { label: "Coming Soon", path: "/shop" },
-        { label: "Coming Soon", path: "/shop" },
-        { label: "Coming Soon", path: "/shop" },
-        { label: "Coming Soon", path: "/shop" }
+        { label: t('footerComingSoon'), path: "/shop" },
+        { label: t('footerComingSoon'), path: "/shop" },
+        { label: t('footerComingSoon'), path: "/shop" },
+        { label: t('footerComingSoon'), path: "/shop" }
       ]
     },
     {
-      title: "About",
+      title: t('footerAbout'),
       items: [
-        { label: "Team Name", sectionId: "team-name" },
-        { label: "Team Logo", sectionId: "team-descriptions" },
-        { label: "Team descriptions", sectionId: "team-descriptions" },
-        { label: "Team Honors", sectionId: "team-honors" }
+        { label: t('footerTeamName'), sectionId: "team-name" },
+        { label: t('footerTeamLogo'), sectionId: "team-descriptions" },
+        { label: t('footerTeamDescriptions'), sectionId: "team-descriptions" },
+        { label: t('footerTeamHonors'), sectionId: "team-honors" }
       ]
     }
   ];
 
   return (
     <div className="w-full max-w-[1300px] mx-auto mt-8 px-4 sm:px-6 md:px-8">
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12">
+      <div className={`grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 ${isRTL ? 'text-right' : 'text-left'}`}>
         {footerColumns.map((column, index) => (
           <div key={index} className="flex flex-col">
             <h3 className="text-[18px] sm:text-[20px] md:text-[24px] font-medium text-secondary mb-4 sm:mb-6 md:mb-[30px]">
@@ -58,13 +61,13 @@ const Footer = () => {
                   key={itemIndex} 
                   className="text-[14px] sm:text-[15px] md:text-[16px] font-normal text-secondary cursor-pointer hover:opacity-80"
                   onClick={() => {
-                    if (column.title === 'Home' && item.sectionId) {
+                    if (column.title === t('footerHome') && item.sectionId) {
                       scrollToSection(item.sectionId, navigate);
-                    } else if (column.title === 'News' && item.filter) {
+                    } else if (column.title === t('footerNews') && item.filter) {
                       navigateToNewsWithFilter(item.filter, navigate);
-                    } else if (column.title === 'About' && item.sectionId) {
+                    } else if (column.title === t('footerAbout') && item.sectionId) {
                       scrollToAboutSection(item.sectionId, navigate);
-                    } else if (column.title === 'Shop' && item.path) {
+                    } else if (column.title === t('footerShop') && item.path) {
                       navigate(item.path);
                     }
                   }}

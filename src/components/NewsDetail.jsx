@@ -1,13 +1,24 @@
 import React, { useState, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { newsData } from '../data/newsData'
 import NewsBox from './NewsBox'
 
 export default function NewsDetail() {
   const { id } = useParams()
+  const { i18n } = useTranslation()
+  const currentLang = i18n.language
   const news = newsData.find(item => item.id === parseInt(id))
   const [isLiked, setIsLiked] = useState(false)
   const [isDisliked, setIsDisliked] = useState(false)
+
+  // Helper function to get the correct language value
+  const getLocalizedValue = (value) => {
+    if (typeof value === 'object' && value !== null) {
+      return value[currentLang] || value.en || '';
+    }
+    return value || '';
+  };
 
   // Get 3 random suggested articles (excluding current article)
   const suggestedArticles = useMemo(() => {
@@ -45,7 +56,7 @@ export default function NewsDetail() {
       <div className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] relative">
         <img 
           src={news.image} 
-          alt={news.title} 
+          alt={getLocalizedValue(news.title)} 
           className={`w-full h-full object-cover ${news.type === 'video' ? 'brightness-50' : ''}`}
           onError={(e) => {
             console.error('Error loading image:', news.image)
@@ -84,12 +95,12 @@ export default function NewsDetail() {
           <div className="col-span-12 lg:col-span-8 relative -mt-[100px] sm:-mt-[120px] md:-mt-[140px] lg:-mt-[163px] mb-16 sm:mb-24 md:mb-32">
             <div className="w-full bg-quinary-tint-900 shadow-[0_0_16px_rgba(0,0,0,0.25)] p-4 sm:p-6 md:p-8">
               <h1 className="text-[24px] sm:text-[28px] md:text-[32px] lg:text-[36px] font-bold text-secondary line-clamp-2">
-                {news.title}
+                {getLocalizedValue(news.title)}
               </h1>
               
               {/* Main content */}
               <div className="text-[16px] sm:text-[18px] md:text-[20px] lg:text-[24px] font-regular text-secondary mt-4 sm:mt-6 whitespace-pre-line">
-                {news.content}
+                {getLocalizedValue(news.content)}
               </div>
 
               {/* Slideshow section - only for slideshow type */}
@@ -117,7 +128,7 @@ export default function NewsDetail() {
               <div className="mt-6 sm:mt-8 md:mt-[42px] flex flex-col">
                 {/* Publication date */}
                 <div className="text-[14px] sm:text-[16px] font-normal text-secondary-tint-500">
-                  {news.date}
+                  {getLocalizedValue(news.date)}
                 </div>
 
                 {/* Keywords and interactive elements row */}
@@ -130,7 +141,7 @@ export default function NewsDetail() {
                         className="min-w-[100px] sm:min-w-[119px] h-[28px] sm:h-[32px] bg-secondary-tint-500 flex items-center justify-center rounded-[20px] px-3 sm:px-4"
                       >
                         <span className="text-[14px] sm:text-[16px] font-regular text-quinary-tint-800 whitespace-nowrap">
-                          {keyword}
+                          {getLocalizedValue(keyword)}
                         </span>
                       </div>
                     ))}

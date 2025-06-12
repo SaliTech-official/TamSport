@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { newsData } from '../data/newsData';
 
 const LatestVideos = () => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.language === 'fa';
+  const currentLang = i18n.language;
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -19,9 +23,17 @@ const LatestVideos = () => {
   const latestVideos = [...newsData]
     .filter(news => news.type === 'video')
     .sort((a, b) => {
-      // Convert time strings to numbers for comparison
-      const timeA = parseInt(a.date.replace('H', ''));
-      const timeB = parseInt(b.date.replace('H', ''));
+      // Extract hours from date strings
+      const getHours = (date) => {
+        if (typeof date === 'object') {
+          const enDate = date.en;
+          return parseInt(enDate.replace('H', ''));
+        }
+        return parseInt(date.replace('H', ''));
+      };
+
+      const timeA = getHours(a.date);
+      const timeB = getHours(b.date);
       return timeA - timeB;
     })
     .slice(0, 5);
@@ -35,19 +47,19 @@ const LatestVideos = () => {
   return (
     <>
       <div className="w-full max-w-[1300px] mx-auto mt-8 flex flex-row justify-between items-center px-2 sm:px-4">
-        <h2 className="text-[28px] sm:text-[36px] md:text-[48px] font-regular text-secondary order-1">Latest Videos</h2>
+        <h2 className="text-[28px] sm:text-[36px] md:text-[48px] font-regular text-secondary order-1">{t('latestVideos')}</h2>
         <button 
           onClick={() => navigate('/news?type=video')}
           className="flex items-center gap-1 text-[16px] sm:text-[20px] md:text-[24px] text-secondary-tint-200 hover:text-secondary-tint-600 transition-colors duration-300 no-underline group order-2"
         >
-          VIEW ALL
+          {t('viewAll')}
           <svg 
             width="24" 
             height="24" 
             viewBox="0 0 24 24" 
             fill="none" 
             xmlns="http://www.w3.org/2000/svg"
-            className="text-secondary-tint-200 group-hover:text-secondary-tint-600 transition-colors duration-300"
+            className={`text-secondary-tint-200 group-hover:text-secondary-tint-600 transition-colors duration-300 ${isRTL ? 'rotate-180' : ''}`}
           >
             <path 
               d="M5 12H19M19 12L12 5M19 12L12 19" 
@@ -71,7 +83,7 @@ const LatestVideos = () => {
             <div className="absolute inset-0">
               <img 
                 src={video.image} 
-                alt={video.title} 
+                alt={typeof video.title === 'object' ? video.title[currentLang] : video.title} 
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 onError={(e) => {
                   console.error('Error loading image:', video.image)
@@ -86,9 +98,13 @@ const LatestVideos = () => {
             </div>
             {/* Top Info */}
             <div className="absolute top-[8px] sm:top-[18px] right-2 sm:right-6 flex items-center">
-              <span className="text-[10px] sm:text-[14px] font-medium text-quinary-tint-800">{video.date}</span>
+              <span className="text-[10px] sm:text-[14px] font-medium text-quinary-tint-800">
+                {typeof video.date === 'object' ? video.date[currentLang] : video.date}
+              </span>
               <div className="mx-1 sm:mx-2 h-4 w-[1px] bg-quinary-tint-800"></div>
-              <span className="text-[10px] sm:text-[14px] font-medium text-tertiary-tint-200">{video.category}</span>
+              <span className="text-[10px] sm:text-[14px] font-medium text-tertiary-tint-200">
+                {typeof video.category === 'object' ? video.category[currentLang] : video.category}
+              </span>
             </div>
             {/* Play Button */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -113,8 +129,10 @@ const LatestVideos = () => {
               </svg>
             </div>
             {/* Bottom Title */}
-            <div className="absolute bottom-2 sm:bottom-8 left-2 sm:left-6">
-              <h3 className="text-[16px] sm:text-[24px] md:text-[32px] font-bold text-quinary-tint-800">{video.title}</h3>
+            <div className={`absolute bottom-2 sm:bottom-8 ${isRTL ? 'right-2 sm:right-6' : 'left-2 sm:left-6'}`}>
+              <h3 className={`text-[16px] sm:text-[24px] md:text-[32px] font-bold text-quinary-tint-800 ${isRTL ? 'text-right' : 'text-left'}`}>
+                {typeof video.title === 'object' ? video.title[currentLang] : video.title}
+              </h3>
             </div>
           </div>
         ))}
@@ -132,7 +150,7 @@ const LatestVideos = () => {
             <div className="absolute inset-0">
               <img 
                 src={video.image} 
-                alt={video.title} 
+                alt={typeof video.title === 'object' ? video.title[currentLang] : video.title} 
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 onError={(e) => {
                   console.error('Error loading image:', video.image)
@@ -147,9 +165,13 @@ const LatestVideos = () => {
             </div>
             {/* Top Info */}
             <div className="absolute top-2 sm:top-4 right-2 sm:right-4 flex items-center">
-              <span className="text-[10px] sm:text-[12px] font-regular text-quinary-tint-800">{video.date}</span>
+              <span className="text-[10px] sm:text-[12px] font-regular text-quinary-tint-800">
+                {typeof video.date === 'object' ? video.date[currentLang] : video.date}
+              </span>
               <div className="mx-1 sm:mx-2 h-4 w-[1px] bg-quinary-tint-800"></div>
-              <span className="text-[10px] sm:text-[12px] font-regular text-tertiary-tint-200">{video.category}</span>
+              <span className="text-[10px] sm:text-[12px] font-regular text-tertiary-tint-200">
+                {typeof video.category === 'object' ? video.category[currentLang] : video.category}
+              </span>
             </div>
             {/* Play Button */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -174,8 +196,10 @@ const LatestVideos = () => {
               </svg>
             </div>
             {/* Bottom Title */}
-            <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4">
-              <h3 className="text-[12px] sm:text-[16px] md:text-[20px] font-bold text-quinary-tint-800">{video.title}</h3>
+            <div className={`absolute bottom-2 sm:bottom-4 ${isRTL ? 'right-2 sm:right-4' : 'left-2 sm:left-4'}`}>
+              <h3 className={`text-[12px] sm:text-[16px] md:text-[20px] font-bold text-quinary-tint-800 ${isRTL ? 'text-right' : 'text-left'}`}>
+                {typeof video.title === 'object' ? video.title[currentLang] : video.title}
+              </h3>
             </div>
           </div>
         ))}
