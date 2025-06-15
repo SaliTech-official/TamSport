@@ -2,6 +2,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 @theme {
   /* Font families as variables if needed */
@@ -9,6 +10,7 @@
 
   /* Primary colors */
   --color-primary: #980B1C;
+  --color-primary-rgb: 152, 11, 28;
   --color-primary-100: #890A19;
   --color-primary-200: #7A0916;
   --color-primary-300: #6A0814;
@@ -124,6 +126,10 @@
 
   body {
     background-color: var(--color-quinary-tint-600);
+  }
+
+  [dir="rtl"] {
+    font-family: 'Vazirmatn', sans-serif;
   }
 }
 
