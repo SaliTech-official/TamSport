@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSearch } from '../../context/SearchContext'
 import { useNavigate } from 'react-router-dom'
-// Removed motion, AnimatePresence imports from 'framer-motion'
 import NewsFilter from '../../components/blog/NewsFilter'
 import NewsBox from '../../components/blog/NewsBox'
 import SpinLoader from '../../pages/UI/SpinLoader'
@@ -11,14 +10,11 @@ import NoArticlesFound from '../../pages/UI/NoArticlesFound'
 import useHttp from '../../hooks/useHttp'
 import FilterSummary from '../../components/FilterSummary'
 
-
-// Removed containerVariants and itemVariants definitions
-
 export default function News() {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === 'fa';
   const { searchQuery } = useSearch();
-  const navigate = useNavigate();x
+  const navigate = useNavigate();
 
   const [requestUrl, setRequestUrl] = useState(() => {
     const params = new URLSearchParams(window.location.search);
@@ -73,7 +69,6 @@ export default function News() {
     return (teamFromUrl && !isNaN(parseInt(teamFromUrl))) ? teamFromUrl : '';
   });
 
-
   const activeFilter = new URLSearchParams(window.location.search).get("type");
   const searchParam = new URLSearchParams(window.location.search).get("search");
   const categoryParam = new URLSearchParams(window.location.search).get("category");
@@ -106,9 +101,13 @@ export default function News() {
     }
     params.delete('page'); // Reset page to 1 when changing filter
 
-    navigate(`${window.location.pathname}?${params.toString()}`);
+    const newSearchParams = params.toString();
+    navigate(`${window.location.pathname}?${newSearchParams}`);
+    setCurrentSearchParams(newSearchParams); // Update the state to trigger useEffect
     setAllArticles([]); // Clear articles to show new filtered results
   };
+
+  const [currentSearchParams, setCurrentSearchParams] = useState(window.location.search);
 
   // Effect to update articles when URL changes (after navigation)
   useEffect(() => {
@@ -146,7 +145,8 @@ export default function News() {
       newSearchParams.set('fetch-all', 'true');
     }
     setRequestUrl(`${newSearchUrl}?${newSearchParams.toString()}`);
-  }, [window.location.search]); // Depend on window.location.search
+    setCurrentSearchParams(window.location.search);
+  }, [currentSearchParams]); // Depend on currentSearchParams state instead of window.location.search directly
 
   // This useEffect handles setting allArticles when response changes and clears articles
   // when response is null (e.g. on new filter apply)
@@ -166,7 +166,9 @@ export default function News() {
       const nextPage = parseInt(currentPage) + 1;
       const params = new URLSearchParams(window.location.search);
       params.set('page', nextPage.toString());
-      window.history.replaceState({}, '', `${window.location.pathname}?${params.toString()}`);
+      const newSearchParams = params.toString();
+      window.history.replaceState({}, '', `${window.location.pathname}?${newSearchParams}`);
+      setCurrentSearchParams(newSearchParams); // Update the state to trigger useEffect
       setRequestUrl(response.next);
     }
   };

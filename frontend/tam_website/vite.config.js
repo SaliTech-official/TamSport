@@ -6,7 +6,13 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   build: {
     outDir: 'dist',
-    sourcemap: false,
+    sourcemap: true, // Enable source maps for debugging
     minify: 'esbuild',
+    rollupOptions: {
+      output: {
+        manualChunks: undefined, // Prevent chunk splitting issues
+      }
+    }
   },
+
 })
