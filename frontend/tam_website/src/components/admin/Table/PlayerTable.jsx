@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import useAdminHttp from '../../../hooks/useAdminHttp';
-import DeletePlayerModal from '../modal/DeletePlayerModal';
+import DeletePlayerModal from '../Modal/DeletePlayerModal';
 
 const PlayerTable = ({ navigate, players, getPlayers, currentPage, totalItems, onPageChangeAfterDelete }) => {
   // Delete player state

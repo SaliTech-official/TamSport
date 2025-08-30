@@ -5,7 +5,7 @@ import useAdminHttp from '../../../hooks/useAdminHttp';
 import { successNotif, errorNotif } from '../../../utils/customNotifs';
 import SpinLoader from '../../../pages/UI/SpinLoader';
 import AdminSomethingWentWrong from '../../../pages/adminUI/AdminSomethingWentWrong';
-import AdminArticleNotFound from '../../../pages/adminUi/AdminArticleNotFound';
+import AdminArticleNotFound from '../../../pages/adminUI/AdminArticleNotFound';
 import { validateNewsForm } from '../../../validators/NewsValidators';
 import QuillEditor from '../../../components/admin/Editor/QuillEditor';
 import FormHeader from '../../../components/UI/FormHeader';

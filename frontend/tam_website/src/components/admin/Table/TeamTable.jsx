@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import useAdminHttp from '../../../hooks/useAdminHttp';
-import DeleteTeamModal from '../modal/DeleteTeamModal';
+import DeleteTeamModal from '../Modal/DeleteTeamModal';
 
 const TeamTable = ({ navigate, teams, getTeams, currentPage, totalItems, onPageChangeAfterDelete }) => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);

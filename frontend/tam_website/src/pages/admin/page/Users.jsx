@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useSearchParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import UsersTable from '../../../components/admin/Table/UsersTable';
-import UsersFilter from '../../../components/admin/Filter/UsersFIlter';
+import UsersFilter from '../../../components/admin/Filter/UsersFilter';
 import AdminPagination from '../../../components/admin/AdminPagination';
 import useAdminHttp from '../../../hooks/useAdminHttp';
 import SpinLoader from '../../../pages/UI/SpinLoader';
