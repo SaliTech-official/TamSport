@@ -21,7 +21,7 @@ const useAuthHttp = (url, options = null) => {
         return true;
       }
     } catch (error) {
-      console.log('some error occurd!', error.message);
+      console.log('some error occurd!');
     }
     return false;
   }, [refreshToken, tokens, logout]);
@@ -48,7 +48,6 @@ const useAuthHttp = (url, options = null) => {
     
     const resData = await res.json();
     
-    console.log(resData);
     
     if (res.status === 401 && resData?.messages[0].message === "Token is expired") {
       // Try to refresh the token
@@ -105,7 +104,6 @@ const useAuthHttp = (url, options = null) => {
         responseData = await customFetchFunction(url, options);
       }
       setData(responseData);
-      console.log(responseData);
       
       return responseData      
 

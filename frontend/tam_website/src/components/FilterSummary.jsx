@@ -34,12 +34,9 @@ const FilterSummary = ({ contentType, team, search, onClearAllFilters }) => {
           }));
           setTeamOptions(formattedTeams);
 
-          console.log("FilterSummary - Fetched filter data:", data);
-          console.log("FilterSummary - Formatted Article Type Options:", formattedArticleTypes);
-          console.log("FilterSummary - Formatted Team Options:", formattedTeams);
         }
       } catch (error) {
-        console.error("Failed to fetch filter data:", error);
+        console.error("Failed to fetch filter data:");
       }
     };
 

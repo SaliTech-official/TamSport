@@ -35,7 +35,6 @@ export default function NewsDetail() {
     }
   }, [article])
 
-  console.log(errorMessage);
   
 
   if (isError && errorMessage?.detail === "No Article matches the given query.") {
@@ -72,7 +71,7 @@ export default function NewsDetail() {
         throw new Error('Failed to toggle like')
       }
     } catch (error) {
-      console.error('Error toggling like:', error)
+      console.error('Error toggling like:')
     }
   }
 

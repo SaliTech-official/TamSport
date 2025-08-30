@@ -37,12 +37,9 @@ const NewsFilter = ({ activeFilter, onFilterChange, selectedTeam, onTeamChange, 
           }));
           setTeamOptions(formattedTeams);
 
-          console.log("Fetched filter data:", data);
-          console.log("Formatted Article Type Options:", formattedArticleTypes);
-          console.log("Formatted Team Options:", formattedTeams);
         }
       } catch (error) {
-        console.error("Failed to fetch filter data:", error);
+        console.error("Failed to fetch filter data:");
         // Handle error, e.g., show a message to the user
       }
     };
@@ -64,7 +61,6 @@ const NewsFilter = ({ activeFilter, onFilterChange, selectedTeam, onTeamChange, 
   }, []);
 
   const handleFilterClick = (filterId, filterType = 'type') => {
-    console.log(filterId, filterType);
     onFilterChange(filterId, filterType);
     setIsMobileMenuOpen(false);
   };
