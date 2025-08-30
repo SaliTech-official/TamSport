@@ -14,7 +14,7 @@ export default function Profile() {
   const [user, setUser] = useState(null);
   const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
 
-  const { data, isLoading, isError, sendRequest } = useAdminHttp('http://localhost:8000/api/auth/user/');
+  const { data, isLoading, isError, sendRequest } = useAdminHttp('/api/auth/user/');
 
   useEffect(() => {
     if (data && !data.isError) {
