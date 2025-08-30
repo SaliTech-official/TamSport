@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
     'django_jalali',
 
     # local apps
@@ -222,9 +221,9 @@ PARLER_LANGUAGES = {
 PARLER_DEFAULT_LANGUAGE_CODE = 'en'
 
 # Redis Configuration
-REDIS_HOST = 'redis'
-REDIS_PORT = 6379
-REDIS_DB = 0
+REDIS_HOST = os.getenv("REDIS_HOST")
+REDIS_PORT = os.getenv("REDIS_PORT")
+REDIS_DB = os.getenv("REDIS_DB")
 
 # Celery Configuration
 CELERY_BROKER_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}'

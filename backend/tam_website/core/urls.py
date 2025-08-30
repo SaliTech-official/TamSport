@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('rosetta/', include('rosetta.urls')),
-    path('auth/', include('accounts.urls')),
-    path('blog/', include('blog.urls')),
-    path('admin/', include('adminpanel.urls')),
+    path('api/auth/', include('accounts.urls')),
+    path('api/blog/', include('blog.urls')),
+    path('api/admin/', include('adminpanel.urls')),
 ]

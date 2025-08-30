@@ -40,7 +40,7 @@ export default function News() {
     const currentPageParam = params.get('page');
     params.delete('page'); // Always start fresh with page 1 if filters change
 
-    const searchUrl = new URL(`http://${domainUrl}:8000/api/blog/articles`);
+    const searchUrl = new URL(`/api/blog/articles`);
     if (searchParam) {
       searchUrl.searchParams.set('search', searchParam);
     }

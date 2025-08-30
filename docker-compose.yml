@@ -7,7 +7,7 @@ services:
       - POSTGRES_USER=${DATABASE_USER}
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
     volumes:
-      - tam_db_data:/var/lib/postgresql/data
+      - tamdb_data:/var/lib/postgresql/data
     networks:
       - tam-network
 
@@ -31,6 +31,8 @@ services:
       - redis
     networks:
       - tam-network
+    ports:
+      - "8000:8000"
     expose:
       - "8000"
 
@@ -61,7 +63,7 @@ services:
       - backend
 
 volumes:
-  tam_db_data:
+  tamdb_data:
   redis_data:
 
 networks:
