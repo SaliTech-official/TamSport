@@ -1,22 +1,15 @@
-# Use Node.js 18 Alpine as base image for smaller size  
-FROM node:18-alpine  
+FROM node:18-alpine as builder
 
-# Set working directory  
-WORKDIR /app  
+WORKDIR /app
 
-# Copy package files first for better layer caching  
-COPY ./frontend/tam_website/package*.json ./  
+COPY ./frontend/tam_website/package*.json ./
+RUN npm install
+COPY ./frontend/tam_website .
+RUN npm run build
 
-# Install dependencies and add node_modules/.bin to PATH
-RUN npm install && \
-    npm install -g vite && \
-    export PATH=$PATH:/app/node_modules/.bin
+FROM nginx:1.25-alpine as production
 
-# Copy application code  
-COPY ./frontend/tam_website .  
+RUN rm -rf /usr/share/nginx/html/*
+COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Expose Vite development server port  
-EXPOSE 5173  
-
-# Start Vite development server with host flag
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+EXPOSE 80
