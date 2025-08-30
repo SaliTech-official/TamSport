@@ -29,7 +29,7 @@ const PlayerTable = ({ navigate, players, getPlayers, currentPage, totalItems, o
     setIsDeleting(true);
   
     try {
-      await sendRequest(`http://localhost:8000/api/admin/player-delete/${playerToDelete.id}/`, 'DELETE');
+      await sendRequest(`/api/admin/player-delete/${playerToDelete.id}/`, 'DELETE');
   
       setDeleteModalOpen(false);
       setPlayerToDelete(null);

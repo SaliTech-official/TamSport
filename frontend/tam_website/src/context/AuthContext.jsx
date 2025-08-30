@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import domainUrl from '../utils/api';
 
 
 export const AuthContext = createContext(
@@ -53,7 +52,7 @@ export const AuthProvider = ({ children }) => {
         }
 
         const accessToken = JSON.parse(storedTokens).access;
-        const response = await fetch(`http://${domainUrl}:8000/api/admin/admin-pannel-access`, {
+        const response = await fetch(`/api/admin/admin-pannel-access`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${accessToken}`,
@@ -85,7 +84,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (phone_number, password) => {
     try {
 
-      const response = await fetch('http://localhost:8000/api/auth/get-access-token/', {
+      const response = await fetch('/api/auth/get-access-token/', {
         method: 'POST',
         headers: {
           ...authHeader()
@@ -116,7 +115,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
-      const response = await fetch('http://localhost:8000/api/auth/register/', {
+      const response = await fetch('/api/auth/register/', {
         method: 'POST',
         headers: {
           ...authHeader(),
@@ -155,7 +154,7 @@ export const AuthProvider = ({ children }) => {
         throw new Error('No tokens found');
       }
       const refreshToken = JSON.parse(storedTokens).refresh;
-      const res = await fetch(`http://${domainUrl}:8000/api/auth/get-refresh-token/`, {
+      const res = await fetch(`/api/auth/get-refresh-token/`, {
         method: 'POST',
         headers: {
           ...authHeader(),

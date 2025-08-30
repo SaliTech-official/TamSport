@@ -50,7 +50,7 @@ const NewsForm = () => {
     data: filterData,
     isLoading: filterLoading,
     isError: filterError
-  } = useAdminHttp('http://localhost:8000/api/admin/article-filter-data/');
+  } = useAdminHttp('/api/admin/article-filter-data/');
   
   const {
     isLoading: submitLoading,
@@ -248,7 +248,7 @@ const NewsForm = () => {
     formDataToSend.append('slideshow_image_count', formData.slideshow_images.length);
 
     try {
-      const response = await sendRequest('http://localhost:8000/api/admin/article-create/', 'POST', formDataToSend);
+      const response = await sendRequest('/api/admin/article-create/', 'POST', formDataToSend);
       if (response?.isError) {
         // Set backend errors and merge with any existing ones
         const backendErrors = response?.errorContent || {};

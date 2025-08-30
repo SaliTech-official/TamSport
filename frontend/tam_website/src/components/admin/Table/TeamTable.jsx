@@ -22,7 +22,7 @@ const TeamTable = ({ navigate, teams, getTeams, currentPage, totalItems, onPageC
     if (!teamToDelete) return;
     setIsDeleting(true);
     try {
-      await sendRequest(`http://localhost:8000/api/admin/team-delete/${teamToDelete.id}/`, 'DELETE');
+      await sendRequest(`/api/admin/team-delete/${teamToDelete.id}/`, 'DELETE');
       setDeleteModalOpen(false);
       setTeamToDelete(null);
       // After delete, handle page change if needed

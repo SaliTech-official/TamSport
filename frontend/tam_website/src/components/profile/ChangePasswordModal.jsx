@@ -54,7 +54,7 @@ export default function ChangePasswordModal({ isOpen, onClose }) {
     try {
       const payload = { old_password: fields.old_password, new_password: fields.new_password };
       const res = await sendRequest(
-        'http://localhost:8000/api/blog/change_password/',
+        '/api/blog/change_password/',
         'PATCH',
         payload
       );

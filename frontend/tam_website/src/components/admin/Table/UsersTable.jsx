@@ -69,7 +69,7 @@ const UsersTable = ({ navigate, users, getUsers, currentPage, totalItems, onPage
     setIsConfirmingSelfDeactivation(true); 
 
     try {
-      const url = `http://localhost:8000/api/admin/user-deactivate/${userToDeactivate.id}/${isFinalConfirmation ? '?force_deactivate=true' : ''}`;
+      const url = `/api/admin/user-deactivate/${userToDeactivate.id}/${isFinalConfirmation ? '?force_deactivate=true' : ''}`;
       const response = await sendRequest(url, 'PATCH', { is_active: false });
 
       if (response && response?.self_deactivation_pending) {
@@ -99,7 +99,7 @@ const UsersTable = ({ navigate, users, getUsers, currentPage, totalItems, onPage
     setIsActivating(true);
 
     try {
-      await sendRequest(`http://localhost:8000/api/admin/user-deactivate/${userToActivate.id}/`, 'PATCH', { is_active: true });
+      await sendRequest(`/api/admin/user-deactivate/${userToActivate.id}/`, 'PATCH', { is_active: true });
 
       setActivateModalOpen(false);
       setUserToActivate(null);

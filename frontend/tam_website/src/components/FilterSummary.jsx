@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import useHttp from '../hooks/useHttp';
-import domainUrl from '../utils/api';
 
 
 const FilterSummary = ({ contentType, team, search, onClearAllFilters }) => {
@@ -12,7 +11,7 @@ const FilterSummary = ({ contentType, team, search, onClearAllFilters }) => {
   const [teamOptions, setTeamOptions] = useState([]);
 
   const { sendRequest: fetchFilterData, isLoading: isLoadingFilterData, isError: isErrorFilterData } = useHttp(
-    `http://${domainUrl}:8000/api/blog/article-filter-data`,
+    `/api/blog/article-filter-data`,
     true, // Send immediately on mount
     'GET'
   );

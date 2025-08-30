@@ -23,7 +23,7 @@ const Players = () => {
   const position = searchParams.get('position') || '';
   
   // Fetch players data
-  const url = `http://localhost:8000/api/admin/players/?page=${currentPage}&page_size=${itemsPerPage}${search ? `&search=${encodeURIComponent(search)}` : ''}${position ? `&position=${position}` : ''}${searchLanguage ? `&search_language=${searchLanguage}` : ''}`;
+  const url = `/api/admin/players/?page=${currentPage}&page_size=${itemsPerPage}${search ? `&search=${encodeURIComponent(search)}` : ''}${position ? `&position=${position}` : ''}${searchLanguage ? `&search_language=${searchLanguage}` : ''}`;
   const {
     isLoading,
     data,

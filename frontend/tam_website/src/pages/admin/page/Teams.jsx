@@ -20,7 +20,7 @@ const Teams = () => {
   const searchLanguage = searchParams.get('searchLanguage') || 'fa';
 
   // Fetch teams data
-  const url = `http://localhost:8000/api/admin/team-list/?page=${currentPage}&page_size=${itemsPerPage}${search ? `&search=${encodeURIComponent(search)}` : ''}${searchLanguage ? `&search_language=${searchLanguage}` : ''}`;
+  const url = `/api/admin/team-list/?page=${currentPage}&page_size=${itemsPerPage}${search ? `&search=${encodeURIComponent(search)}` : ''}${searchLanguage ? `&search_language=${searchLanguage}` : ''}`;
   const {
     isLoading,
     data,

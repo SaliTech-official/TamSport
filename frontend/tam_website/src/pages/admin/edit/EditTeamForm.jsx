@@ -26,7 +26,7 @@ const EditTeamForm = () => {
     isError: fetchError,
     data: teamDetails,
     sendRequest: fetchTeamDetails
-  } = useAdminHttp(`http://localhost:8000/api/admin/team-detail/${teamId}/`);
+  } = useAdminHttp(`/api/admin/team-detail/${teamId}/`);
 
   const {
     isLoading: submitLoading,
@@ -118,7 +118,7 @@ const EditTeamForm = () => {
     }
 
     try {
-      const response = await submitUpdate(`http://localhost:8000/api/admin/team-update/${teamId}/`, 'PATCH', formDataToSend);
+      const response = await submitUpdate(`/api/admin/team-update/${teamId}/`, 'PATCH', formDataToSend);
       if (response?.isError) {
         // Set backend errors and merge with any existing ones
         const backendErrors = response?.errorContent || {};

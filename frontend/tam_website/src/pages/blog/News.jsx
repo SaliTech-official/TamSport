@@ -124,7 +124,7 @@ export default function News() {
     // Also keep selectedTeam in sync with URL (valid numeric or empty)
     setSelectedTeam(teamParam && !isNaN(parseInt(teamParam)) ? teamParam : '');
 
-    const newSearchUrl = new URL(`http://${domainUrl}:8000/api/blog/articles`);
+    const newSearchUrl = new URL(`/api/blog/articles`);
     if (searchParam) {
       newSearchUrl.searchParams.set('search', searchParam);
     }

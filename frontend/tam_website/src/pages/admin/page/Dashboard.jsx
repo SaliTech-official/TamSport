@@ -5,7 +5,6 @@ import SpinLoader from '../../../pages/UI/SpinLoader';
 import SomethingWentWrong from '../../../pages/UI/SomethingWentWrong';
 import { useNavigate } from 'react-router-dom';
 import { AdminIcons } from '../../../data/Icons';
-import domainUrl from '../../../utils/api';
 import { FaEye, FaHeart } from 'react-icons/fa';
 import { AuthContext } from '../../../context/AuthContext';
 
@@ -26,7 +25,7 @@ const Dashboard = () => {
     data: dashboardData,
     isLoading: dashboardLoading,
     isError: dashboardError,
-  } = useAdminHttp(`http://${domainUrl}:8000/api/admin/admin-dashboard-data/`);
+  } = useAdminHttp(`/api/admin/admin-dashboard-data/`);
 
   if (dashboardLoading) {
     return <SpinLoader />;

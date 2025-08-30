@@ -57,13 +57,13 @@ const EditNewsForm = () => {
     isLoading: articleDetailsLoading,
     isError: articleDetailsError,
     sendRequest: fetchArticleDetails
-  } = useAdminHttp(`http://localhost:8000/api/admin/article-detail/${articleId}/`);
+  } = useAdminHttp(`/api/admin/article-detail/${articleId}/`);
   
   const {
     data: filterData,
     isLoading: filterLoading,
     isError: filterError
-  } = useAdminHttp('http://localhost:8000/api/admin/article-filter-data/');
+  } = useAdminHttp('/api/admin/article-filter-data/');
   
   const {
     isLoading: submitLoading,
@@ -372,7 +372,7 @@ const EditNewsForm = () => {
     
 
     try {
-      const response = await sendRequest(`http://localhost:8000/api/admin/article-update/${articleId}/`, 'PATCH', formDataToSend);
+      const response = await sendRequest(`/api/admin/article-update/${articleId}/`, 'PATCH', formDataToSend);
       
       if (response?.isError) {
         const backendErrors = response?.errorContent || {};

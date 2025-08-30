@@ -22,7 +22,7 @@ const PlayerFilter = ({
     data: positionsData,
     isLoading: positionsLoading,
     isError: positionsError
-  } = useAdminHttp('http://localhost:8000/api/admin/player-positions/');
+  } = useAdminHttp('/api/admin/player-positions/');
 
   // Initialize search input when search prop changes
   useEffect(() => {

@@ -26,7 +26,7 @@ const NewsFilter = ({
     data: filterData,
     isLoading: filterLoading,
     isError: filterError
-  } = useAdminHttp('http://localhost:8000/api/admin/article-filter-data/?filter_page=True');
+  } = useAdminHttp('/api/admin/article-filter-data/?filter_page=True');
 
   // Initialize search input when search prop changes
   useEffect(() => {

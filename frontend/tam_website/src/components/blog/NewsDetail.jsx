@@ -24,7 +24,7 @@ export default function NewsDetail() {
     isError,
     errorMessage,
     data: article,
-  } = useHttp(`http://${domainUrl}:8000/api/blog/articles/${slug}`)
+  } = useHttp(`/api/blog/articles/${slug}`)
 
 
   // Initialize likeCount and isLiked when article data is received
@@ -61,7 +61,7 @@ export default function NewsDetail() {
       setIsLiked(!isLiked)
 
       // Make API call to toggle like
-      const response = await fetch(`http://${domainUrl}:8000/api/blog/article-like/${slug}`, {
+      const response = await fetch(`/api/blog/article-like/${slug}`, {
         method: 'GET',
       })
 
