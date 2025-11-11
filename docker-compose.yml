@@ -11,13 +11,13 @@ services:
     networks:
       - tam-network
 
-  redis:
-    image: redis:7.2-alpine
-    container_name: redis
-    volumes:
-      - redis_data:/data
-    networks:
-      - tam-network
+  # redis:
+  #   image: redis:7.2-alpine
+  #   container_name: redis
+  #   volumes:
+  #     - redis_data:/data
+  #   networks:
+  #     - tam-network
 
   backend:
     build:
@@ -36,19 +36,19 @@ services:
     expose:
       - "8000"
 
-  celery:
-    build:
-      context: .
-      dockerfile: ./docker/django/Dockerfile
-    container_name: celery
-    command: celery -A core worker -l INFO
-    env_file:
-      - ./.env
-    depends_on:
-      - redis
-      - backend
-    networks:
-      - tam-network
+  # celery:
+  #   build:
+  #     context: .
+  #     dockerfile: ./docker/django/Dockerfile
+  #   container_name: celery
+  #   command: celery -A core worker -l INFO
+  #   env_file:
+  #     - ./.env
+  #   depends_on:
+  #     - redis
+  #     - backend
+  #   networks:
+  #     - tam-network
 
   frontend:
     build:

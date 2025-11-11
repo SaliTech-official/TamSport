@@ -12,7 +12,7 @@ import ImagePicker from '../../../components/UI/ImagePicker';
 import FormActions from '../../../components/UI/FormActions';
 import SlideshowImages from '../../../components/admin/SlideshowImages';
 import ImportTranslationModal from '../../../components/admin/Modal/ImportTranslationModal';
-import SchedulePublishModal from '../../../components/admin/Modal/SchedulePublishModal';
+// import SchedulePublishModal from '../../../components/admin/Modal/SchedulePublishModal';
 import { ArticleFormIcons } from '../../../data/Icons';
 import { formatJalaliDateTime } from '../../../utils/dateUtils';
 
@@ -24,7 +24,7 @@ const NewsForm = () => {
   const [mainImagePreview, setMainImagePreview] = useState(null);
   const [slideshowImages, setSlideshowImages] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
+  // const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
   const [scheduledPublishDate, setScheduledPublishDate] = useState(null);
   
   const [tabErrors, setTabErrors] = useState({
@@ -541,10 +541,10 @@ const NewsForm = () => {
                   </select>
                   {formData.status === 'DR' && (
                     <button
-                      type="button"
-                      onClick={() => setIsScheduleModalOpen(true)}
+                      type="disable"
+                      // onClick={() => setIsScheduleModalOpen(true)}
                       className="flex-shrink-0 px-3 py-3 bg-quaternary text-white rounded-lg hover:bg-quaternary/90 transition-colors duration-300 mr-2"
-                      title="زمان‌بندی انتشار"
+                      title="از دسترس خارج"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -614,12 +614,12 @@ const NewsForm = () => {
         onClose={() => setIsModalOpen(false)}
         onImport={handleImportTranslation}
       />
-      <SchedulePublishModal
+      {/* <SchedulePublishModal
         isOpen={isScheduleModalOpen}
         onClose={() => setIsScheduleModalOpen(false)}
         articleId={null} // For new articles, we'll handle scheduling in the form submission
         onSuccess={handleSchedulePublication}
-      />
+      /> */}
     </div>
   );
 };
