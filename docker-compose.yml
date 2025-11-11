@@ -28,7 +28,6 @@ services:
       - ./.env
     depends_on:
       - database
-      - redis
     networks:
       - tam-network
     ports:
