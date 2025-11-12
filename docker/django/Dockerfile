@@ -11,8 +11,8 @@ RUN apt-get update && apt-get install -y \
 
 # Install Python dependencies
 COPY ./backend/requirements.txt .
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt
 
 # Copy project code
 COPY ./backend/tam_website/ .

@@ -5,7 +5,7 @@ from accounts.models import Profile
 from django.utils.html import strip_tags
 from django.utils import timezone
 from datetime import datetime
-from celery import current_app
+# from celery import current_app
 
 
 class BilingualArticleSerializer(serializers.ModelSerializer):
@@ -19,8 +19,8 @@ class BilingualArticleSerializer(serializers.ModelSerializer):
     likes_count = serializers.SerializerMethodField()
     updated_date = serializers.SerializerMethodField()
     created_date = serializers.SerializerMethodField()
-    scheduled_publish_at = serializers.DateTimeField(required=False, allow_null=True)
-    remaining_time = serializers.SerializerMethodField()
+    # scheduled_publish_at = serializers.DateTimeField(required=False, allow_null=True)
+    # remaining_time = serializers.SerializerMethodField()
     title_fa = serializers.SerializerMethodField()
     title_en = serializers.SerializerMethodField()
     body_fa = serializers.SerializerMethodField()
@@ -32,8 +32,7 @@ class BilingualArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         fields = ['id', 'title', 'title_fa', 'title_en', 'body_fa', 'body_en', 'status', 'type', 'team', 'team_id',
-                  'hits_count', 'likes_count', 'updated_date', 'created_date', 'scheduled_publish_at', 
-                  'remaining_time', 'video_url', 'main_image', 'slideshow_images']
+                    'hits_count', 'likes_count', 'updated_date', 'created_date', 'video_url', 'main_image', 'slideshow_images']
     
     def get_title(self, obj):
         # Get the language from request query params or default to 'fa'
@@ -95,29 +94,29 @@ class BilingualArticleSerializer(serializers.ModelSerializer):
     def get_created_date(self, obj):
         return obj.created_date.strftime('%Y-%m-%d')
     
-    def get_remaining_time(self, obj):
-        """
-        Calculate and return the remaining time until scheduled publication
-        """
-        if not obj.scheduled_publish_at or obj.status != Article.Status.DRAFT:
-            return None
+    # def get_remaining_time(self, obj):
+    #     """
+    #     Calculate and return the remaining time until scheduled publication
+    #     """
+    #     if not obj.scheduled_publish_at or obj.status != Article.Status.DRAFT:
+    #         return None
         
-        now = timezone.now()
-        if obj.scheduled_publish_at <= now:
-            return "0"
+    #     now = timezone.now()
+    #     if obj.scheduled_publish_at <= now:
+    #         return "0"
         
-        # Calculate the time difference
-        time_diff = obj.scheduled_publish_at - now
-        days = time_diff.days
-        hours, remainder = divmod(time_diff.seconds, 3600)
-        minutes, _ = divmod(remainder, 60)
+    #     # Calculate the time difference
+    #     time_diff = obj.scheduled_publish_at - now
+    #     days = time_diff.days
+    #     hours, remainder = divmod(time_diff.seconds, 3600)
+    #     minutes, _ = divmod(remainder, 60)
         
-        if days > 0:
-            return f"{days} روز و {hours} ساعت و {minutes} دقیقه"
-        elif hours > 0:
-            return f"{hours} ساعت و {minutes} دقیقه"
-        else:
-            return f"{minutes} دقیقه"
+    #     if days > 0:
+    #         return f"{days} روز و {hours} ساعت و {minutes} دقیقه"
+    #     elif hours > 0:
+    #         return f"{hours} ساعت و {minutes} دقیقه"
+    #     else:
+    #         return f"{minutes} دقیقه"
     
     def get_main_image(self, obj):
         """Get the main image URL for the article"""
@@ -170,7 +169,7 @@ class CreateArticleSerializer(serializers.Serializer):
     author = serializers.IntegerField(required=False)  # Will be set in the view
     main_image = serializers.ImageField(required=True)  # Main image for all article types
     slideshow_image_count = serializers.IntegerField(required=False, default=0)  # Number of slideshow images
-    scheduled_publish_at = serializers.DateTimeField(required=False, allow_null=True)  # Scheduled publishing time
+    # scheduled_publish_at = serializers.DateTimeField(required=False, allow_null=True)  # Scheduled publishing time
     
     def validate(self, data):
         """
@@ -208,11 +207,11 @@ class CreateArticleSerializer(serializers.Serializer):
         if data['type'] == Article.Type.SLIDE_SHOW and data.get('slideshow_image_count', 0) < 1:
             raise serializers.ValidationError({"slideshow_images": "لطفا حداقل یک تصویر برای اسلایدشو انتخاب کنید."})
         
-        # Validate scheduled_publish_at if provided
-        if data.get('scheduled_publish_at') and data.get('status') == Article.Status.DRAFT:
-            # Ensure the scheduled date is in the future
-            if data['scheduled_publish_at'] <= timezone.now():
-                raise serializers.ValidationError({"scheduled_publish_at": "زمان انتشار باید در آینده باشد."})
+        # # Validate scheduled_publish_at if provided
+        # if data.get('scheduled_publish_at') and data.get('status') == Article.Status.DRAFT:
+        #     # Ensure the scheduled date is in the future
+        #     if data['scheduled_publish_at'] <= timezone.now():
+        #         raise serializers.ValidationError({"scheduled_publish_at": "زمان انتشار باید در آینده باشد."})
             
         return data
     
@@ -230,8 +229,8 @@ class CreateArticleSerializer(serializers.Serializer):
         main_image = validated_data.pop('main_image')
         slideshow_image_count = validated_data.pop('slideshow_image_count', 0)
         
-        # Extract scheduled_publish_at if present
-        scheduled_publish_at = validated_data.pop('scheduled_publish_at', None)
+        # # Extract scheduled_publish_at if present
+        # scheduled_publish_at = validated_data.pop('scheduled_publish_at', None)
         
         # Create the article instance
         article = Article(
@@ -240,7 +239,7 @@ class CreateArticleSerializer(serializers.Serializer):
             type=validated_data.get('type'),
             video_url=validated_data.get('video_url', ''),
             author=Profile.objects.get(user=self.context['request'].user),
-            scheduled_publish_at=scheduled_publish_at
+            # scheduled_publish_at=scheduled_publish_at
         )
         
         # Save without translations first
@@ -271,15 +270,15 @@ class CreateArticleSerializer(serializers.Serializer):
                 slideshow_image_obj.article.add(article)
                 slideshow_images.append(slideshow_image_obj)
         
-        # Schedule publication if needed
-        if scheduled_publish_at and article.status == Article.Status.DRAFT:
-            from blog.tasks import publish_scheduled_article
-            result = publish_scheduled_article.apply_async(
-                args=[article.id],
-                eta=scheduled_publish_at
-            )
-            article.scheduled_task_id = result.id
-            article.save()
+        # # Schedule publication if needed
+        # if scheduled_publish_at and article.status == Article.Status.DRAFT:
+        #     from blog.tasks import publish_scheduled_article
+        #     result = publish_scheduled_article.apply_async(
+        #         args=[article.id],
+        #         eta=scheduled_publish_at
+        #     )
+        #     article.scheduled_task_id = result.id
+        #     article.save()
         
         return article
 
@@ -303,7 +302,7 @@ class ArticleUpdateSerializer(serializers.Serializer):
         required=False,
         allow_empty=True
     )
-    scheduled_publish_at = serializers.DateTimeField(required=False, allow_null=True)
+    # scheduled_publish_at = serializers.DateTimeField(required=False, allow_null=True)
     
     def validate(self, data):
         """
@@ -372,7 +371,7 @@ class ArticleUpdateSerializer(serializers.Serializer):
             if new_slideshow_image_count == 0 and existing_slideshow_images_kept.count() == 0:
                 raise serializers.ValidationError({"slideshow_images": "لطفا حداقل یک تصویر برای اسلایدشو انتخاب کنید."})
         
-        # Removed scheduled_publish_at validation from here, it will be handled in update method
+        # # Removed scheduled_publish_at validation from here, it will be handled in update method
             
         return data
     
@@ -396,47 +395,47 @@ class ArticleUpdateSerializer(serializers.Serializer):
         if 'video_url' in validated_data:
             instance.video_url = validated_data.get('video_url', '')
         
-        # Handle scheduled_publish_at and schedule Celery task
-        scheduled_publish_at_changed = False
-        if 'scheduled_publish_at' in validated_data:
-            scheduled_publish_at = validated_data.get('scheduled_publish_at')
-            # If scheduled_publish_at is provided, check if it's in the future and schedule the task
-            if scheduled_publish_at and (validated_data.get('status', instance.status) == Article.Status.DRAFT):
-                if scheduled_publish_at <= timezone.now():
-                    raise serializers.ValidationError({"scheduled_publish_at": "زمان انتشار باید در آینده باشد."})
-                # If scheduled_publish_at changed or was not set before, revoke previous task
-                if instance.scheduled_task_id:
-                    try:
-                        current_app.control.revoke(instance.scheduled_task_id, terminate=True)
-                    except Exception:
-                        pass
-                instance.scheduled_publish_at = scheduled_publish_at
-                # Schedule new task
-                from blog.tasks import publish_scheduled_article
-                result = publish_scheduled_article.apply_async(
-                    args=[instance.id],
-                    eta=scheduled_publish_at
-                )
-                instance.scheduled_task_id = result.id
-                scheduled_publish_at_changed = True
-            else:
-                # If scheduled_publish_at is removed or status changed, revoke previous task
-                if instance.scheduled_task_id:
-                    try:
-                        current_app.control.revoke(instance.scheduled_task_id, terminate=True)
-                    except Exception:
-                        pass
-                    instance.scheduled_task_id = None
-                instance.scheduled_publish_at = None
-        elif instance.scheduled_publish_at and (validated_data.get('status', instance.status) != Article.Status.DRAFT):
-            # If existing scheduled_publish_at is present but status changed from DRAFT, clear it and revoke
-            if instance.scheduled_task_id:
-                try:
-                    current_app.control.revoke(instance.scheduled_task_id, terminate=True)
-                except Exception:
-                    pass
-                instance.scheduled_task_id = None
-            instance.scheduled_publish_at = None
+        # # Handle scheduled_publish_at and schedule Celery task
+        # scheduled_publish_at_changed = False
+        # if 'scheduled_publish_at' in validated_data:
+        #     scheduled_publish_at = validated_data.get('scheduled_publish_at')
+        #     # If scheduled_publish_at is provided, check if it's in the future and schedule the task
+        #     if scheduled_publish_at and (validated_data.get('status', instance.status) == Article.Status.DRAFT):
+        #         if scheduled_publish_at <= timezone.now():
+        #             raise serializers.ValidationError({"scheduled_publish_at": "زمان انتشار باید در آینده باشد."})
+        #         # If scheduled_publish_at changed or was not set before, revoke previous task
+        #         if instance.scheduled_task_id:
+        #             try:
+        #                 current_app.control.revoke(instance.scheduled_task_id, terminate=True)
+        #             except Exception:
+        #                 pass
+        #         instance.scheduled_publish_at = scheduled_publish_at
+        #         # Schedule new task
+        #         from blog.tasks import publish_scheduled_article
+        #         result = publish_scheduled_article.apply_async(
+        #             args=[instance.id],
+        #             eta=scheduled_publish_at
+        #         )
+        #         instance.scheduled_task_id = result.id
+        #         scheduled_publish_at_changed = True
+        #     else:
+        #         # If scheduled_publish_at is removed or status changed, revoke previous task
+        #         if instance.scheduled_task_id:
+        #             try:
+        #                 current_app.control.revoke(instance.scheduled_task_id, terminate=True)
+        #             except Exception:
+        #                 pass
+        #             instance.scheduled_task_id = None
+        #         instance.scheduled_publish_at = None
+        # elif instance.scheduled_publish_at and (validated_data.get('status', instance.status) != Article.Status.DRAFT):
+        #     # If existing scheduled_publish_at is present but status changed from DRAFT, clear it and revoke
+        #     if instance.scheduled_task_id:
+        #         try:
+        #             current_app.control.revoke(instance.scheduled_task_id, terminate=True)
+        #         except Exception:
+        #             pass
+        #         instance.scheduled_task_id = None
+        #     instance.scheduled_publish_at = None
         
         # Update translations if provided
         if 'title_fa' in validated_data or 'body_fa' in validated_data:

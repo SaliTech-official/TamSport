@@ -27,7 +27,7 @@ const EditNewsForm = () => {
   const [mainImagePreview, setMainImagePreview] = useState(null);
   const [slideshowImages, setSlideshowImages] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
+  // const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
   const [scheduledPublishDate, setScheduledPublishDate] = useState(null);
   const [originalData, setOriginalData] = useState(null);
   const [hasChanges, setHasChanges] = useState(false);
@@ -49,7 +49,7 @@ const EditNewsForm = () => {
     video_url: '',
     main_image: null,
     slideshow_images: [],
-    scheduled_publish_at: null
+    // scheduled_publish_at: null
   });
   
   const {
@@ -110,7 +110,7 @@ const EditNewsForm = () => {
         video_url: articleDetails.video_url || '',
         main_image: null, // This will hold the new main image file if changed
         slideshow_images: [], // This will hold *newly uploaded* slideshow files
-        scheduled_publish_at: articleDetails.scheduled_publish_at || null
+        // scheduled_publish_at: articleDetails.scheduled_publish_at || null
       };
       
       
@@ -137,9 +137,9 @@ const EditNewsForm = () => {
       }
       
       // Configurar fecha de publicación programada
-      if (articleDetails.scheduled_publish_at) {
-        setScheduledPublishDate(new Date(articleDetails.scheduled_publish_at));
-      }
+      // if (articleDetails.scheduled_publish_at) {
+      //   setScheduledPublishDate(new Date(articleDetails.scheduled_publish_at));
+      // }
     }
   }, [articleDetails]);
   
@@ -343,7 +343,7 @@ const EditNewsForm = () => {
     
     // Append fields that have changed (excluding images, handled separately)
     Object.entries(formData).forEach(([key, value]) => {
-      if (key !== 'main_image' && key !== 'slideshow_images' && originalData[key] !== value) {
+      if (key !== 'main_image' && key !== 'slideshow_images' && key !== 'scheduled_publish_at' && originalData[key] !== value) {
         if (value !== null && value !== undefined) {
           formDataToSend.append(key, value);
         }
@@ -423,12 +423,12 @@ const EditNewsForm = () => {
     successNotif('متن ترجمه شده با موفقیت وارد شد.');
   };
   
-  const handleSchedulePublication = (scheduledDate) => {
-    setScheduledPublishDate(scheduledDate);
-    setFormData(prev => ({ ...prev, scheduled_publish_at: scheduledDate.toISOString() }));
-    // Force re-evaluation of hasChanges
-    // setHasChanges(true); // Manually set to true to enable "Save Changes" button
-  };
+  // const handleSchedulePublication = (scheduledDate) => {
+  //   setScheduledPublishDate(scheduledDate);
+  //   setFormData(prev => ({ ...prev, scheduled_publish_at: scheduledDate.toISOString() }));
+  //   // Force re-evaluation of hasChanges
+  //   // setHasChanges(true); // Manually set to true to enable "Save Changes" button
+  // };
 
   const tabs = [
     { id: 'persian', label: 'فارسی', lang: 'fa' },
@@ -694,13 +694,13 @@ const EditNewsForm = () => {
                 {errors.status && (
                 <p className="text-quaternary text-[14px] mt-1 text-right">{errors.status}</p>
                 )}
-                {scheduledPublishDate && formData.status === 'DR' && (
+                {/* {scheduledPublishDate && formData.status === 'DR' && (
                   <div className="mt-2 p-2 bg-blue-50 border border-blue-200 rounded-md">
                     <p className="text-blue-600 text-sm">
                       زمان‌بندی شده برای انتشار در: {formatJalaliDateTime(scheduledPublishDate)}
                     </p>
                   </div>
-                )}
+                )} */}
               </div>
               {formData.type === 'VD' && (
                 <div>

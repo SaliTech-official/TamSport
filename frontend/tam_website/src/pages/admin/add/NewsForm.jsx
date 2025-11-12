@@ -43,7 +43,7 @@ const NewsForm = () => {
     video_url: '',
     main_image: null,
     slideshow_images: [],
-    scheduled_publish_at: null
+    // scheduled_publish_at: null
   });
   
   const {
@@ -229,7 +229,7 @@ const NewsForm = () => {
     const formDataToSend = new FormData();
     
     Object.entries(formData).forEach(([key, value]) => {
-      if (key !== 'main_image' && key !== 'slideshow_images') {
+      if (key !== 'main_image' && key !== 'slideshow_images' && key !== 'scheduled_publish_at') {
         if (value !== null && value !== undefined) {
           formDataToSend.append(key, value);
         }
@@ -292,10 +292,10 @@ const NewsForm = () => {
     successNotif('متن ترجمه شده با موفقیت وارد شد.');
   };
   
-  const handleSchedulePublication = (scheduledDate) => {
-    setScheduledPublishDate(scheduledDate);
-    setFormData(prev => ({ ...prev, scheduled_publish_at: scheduledDate.toISOString() }));
-  };
+  // const handleSchedulePublication = (scheduledDate) => {
+  //   setScheduledPublishDate(scheduledDate);
+  //   setFormData(prev => ({ ...prev, scheduled_publish_at: scheduledDate.toISOString() }));
+  // };
 
   const tabs = [
     { id: 'persian', label: 'فارسی', lang: 'fa' },
@@ -555,13 +555,13 @@ const NewsForm = () => {
                 {errors.status && (
                 <p className="text-quaternary text-[14px] mt-1 text-right">{errors.status}</p>
                 )}
-                {scheduledPublishDate && formData.status === 'DR' && (
+                {/* {scheduledPublishDate && formData.status === 'DR' && (
                   <div className="mt-2 p-2 bg-blue-50 border border-blue-200 rounded-md">
                     <p className="text-blue-600 text-sm">
                       زمان‌بندی شده برای انتشار در: {formatJalaliDateTime(scheduledPublishDate)}
                     </p>
                   </div>
-                )}
+                )} */}
               </div>
               {formData.type === 'VD' && (
                 <div>
