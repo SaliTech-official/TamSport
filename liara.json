@@ -3,20 +3,10 @@
     "django": {
       "pythonVersion": "5.2.1",
       "collectStatic": false,
-      "compileMessages": false,
+      "compileMessages": true,
       "modifySettings": true,
       "timezone": "Asia/Tehran"
       
     },
-    "app": "tam-django",
-    "disks": [
-      {
-        "name": "static",
-        "mountTo": "static"
-      },
-      {
-        "name": "media",
-        "mountTo": "media"
-      }
-    ]
+    "app": "tam-django"
   }
