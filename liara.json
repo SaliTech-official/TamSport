@@ -5,7 +5,7 @@
     },
     "platform": "django",
     "django": {
-      "pythonVersion": "3.10",
+      "pythonVersion": "3.12",
       "collectStatic": false,
       "compileMessages": true,
       "modifySettings": true,
