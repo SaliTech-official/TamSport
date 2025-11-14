@@ -1,7 +1,11 @@
 {
+    "port":80,
+    "build":{
+      "location":"iran"
+    },
     "platform": "django",
     "django": {
-      "pythonVersion": "5.2.1",
+      "pythonVersion": "3.10",
       "collectStatic": false,
       "compileMessages": true,
       "modifySettings": true,
