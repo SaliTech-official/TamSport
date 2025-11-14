@@ -35,24 +35,24 @@ __pycache__/
 *.egg-info/
 
 ## Django
-/backend/media/
-/backend/static/
-/backend/*.log
-/backend/db.sqlite3*
-/backend/local_settings.py
+./media/
+./static/
+./*.log
+./db.sqlite3*
+./local_settings.py
 
 ## Virtual Environment
-/backend/venv/
-/backend/.env/
-/backend/.venv/
+./venv/
+./.env/
+./.venv/
 
 ## Test coverage
-/backend/.coverage
-/backend/htmlcov/
-/backend/.pytest_cache/
+./.coverage
+./htmlcov/
+./.pytest_cache/
 
 ## Documentation
-/backend/docs/_build/
+./docs/_build/
 
 # Docker
 .docker/
