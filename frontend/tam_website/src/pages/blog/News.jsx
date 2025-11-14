@@ -190,9 +190,9 @@ export default function News() {
   };
 
   const handleClearAllFilters = () => {
-    navigate('/news');
-    // window.location.reload(); // REMOVED: Rely on useEffect for re-fetch
     setAllArticles([]);
+    navigate('/news');
+    window.location.reload();
   };
 
   const handleTeamChange = (teamId) => {

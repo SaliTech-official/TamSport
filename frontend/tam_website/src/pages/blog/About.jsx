@@ -46,7 +46,7 @@ export default function About() {
             </div>
           </div>
 
-          <div className="mt-16 sm:mt-20 md:mt-32">
+          {/* <div className="mt-16 sm:mt-20 md:mt-32">
             <h2 id="team-honors" className="text-[28px] sm:text-[36px] md:text-[48px] font-bold text-primary">
               {t('aboutImportantHonors')}
             </h2>
@@ -62,7 +62,7 @@ export default function About() {
                 ))}
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

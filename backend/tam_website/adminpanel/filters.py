@@ -2,7 +2,7 @@ from csv import DictReader
 from django_filters import rest_framework as filters
 from accounts.models import User
 from django.db.models import Q
-from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
+# from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 from blog.models.partial import Player
 from blog.models.article import Team, Article
 
@@ -112,44 +112,45 @@ class ArticleFilter(filters.FilterSet):
         if not value:
             return queryset
         
-        try:
+        # try:
             # Get search language from request, default to 'fa'
-            search_language = self.request.query_params.get('search_language', 'fa')
+            # search_language = self.request.query_params.get('search_language', 'fa')
             
             # Use 'simple' configuration as a fallback if language-specific config doesn't exist
-            config = 'simple'
+            # config = 'simple'
             
             # Create search vectors for title and body
-            title_vector = SearchVector('translations__title', weight='A', config=config)
-            body_vector = SearchVector('translations__body', weight='B', config=config)
+            # title_vector = SearchVector('translations__title', weight='A', config=config)
+            # body_vector = SearchVector('translations__body', weight='B', config=config)
             
             # Combine vectors
-            search_vector = title_vector + body_vector
+            # search_vector = title_vector + body_vector
             
             # Create search query with proper escaping
-            search_query = SearchQuery(value, config=config)
+            # search_query = SearchQuery(value, config=config)
             
             # Perform the search with ranking
-            return queryset.filter(
-                translations__language_code=search_language
-            ).annotate(
-                rank=SearchRank(search_vector, search_query)
-            ).filter(
-                rank__gt=0.3
-            ).order_by(
-                '-rank',  # Sort by search rank first
-                '-created_date'  # Then by creation date
-            ).distinct()
-        except Exception as e:
+            # return queryset.filter(
+            #     translations__language_code=search_language
+            # ).annotate(
+            #     rank=SearchRank(search_vector, search_query)
+            # ).filter(
+            #     rank__gt=0.3
+            # ).order_by(
+            #     '-rank',  # Sort by search rank first
+            #     '-created_date'  # Then by creation date
+            # ).distinct()
+        # except Exception as e:
             # If search fails, fall back to simple contains search
-            if search_language == 'en':
-                return queryset.filter(
-                    Q(translations__title__icontains=value) & Q(translations__language_code='en')
-                ).distinct()
-            else:
-                return queryset.filter(
-                    Q(translations__title__icontains=value) & Q(translations__language_code='fa')
-                ).distinct()
+        search_language = self.request.query_params.get('search_language', 'fa')
+        if search_language == 'en':
+            return queryset.filter(
+                Q(translations__title__icontains=value) & Q(translations__language_code='en')
+            ).distinct()
+        else:
+            return queryset.filter(
+                Q(translations__title__icontains=value) & Q(translations__language_code='fa')
+            ).distinct()
         
     def filter_status(self, queryset, name, value):
         if not value:

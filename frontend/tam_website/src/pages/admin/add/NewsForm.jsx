@@ -14,7 +14,7 @@ import SlideshowImages from '../../../components/admin/SlideshowImages';
 import ImportTranslationModal from '../../../components/admin/Modal/ImportTranslationModal';
 // import SchedulePublishModal from '../../../components/admin/Modal/SchedulePublishModal';
 import { ArticleFormIcons } from '../../../data/Icons';
-import { formatJalaliDateTime } from '../../../utils/dateUtils';
+// import { formatJalaliDateTime } from '../../../utils/dateUtils';
 
 const NewsForm = () => {
   const navigate = useNavigate();
@@ -539,7 +539,7 @@ const NewsForm = () => {
                       return null;
                       })}
                   </select>
-                  {formData.status === 'DR' && (
+                  {/* {formData.status === 'DR' && (
                     <button
                       type="disable"
                       // onClick={() => setIsScheduleModalOpen(true)}
@@ -550,7 +550,7 @@ const NewsForm = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </button>
-                  )}
+                  )} */}
                 </div>
                 {errors.status && (
                 <p className="text-quaternary text-[14px] mt-1 text-right">{errors.status}</p>

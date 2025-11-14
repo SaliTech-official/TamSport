@@ -63,7 +63,7 @@ services:
 
 volumes:
   tamdb_data:
-  redis_data:
+
 
 networks:
   tam-network:

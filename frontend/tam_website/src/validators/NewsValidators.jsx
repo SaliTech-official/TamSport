@@ -7,7 +7,7 @@
  * @param {Object} formData - The form data to validate
  * @returns {Object} Object containing error messages for each invalid field
  */
-export const validateNewsForm = (formData) => {
+export const validateNewsForm = (formData, articleDetails={}) => {
   const errors = {};
   
   // Validate title fields
@@ -44,7 +44,7 @@ export const validateNewsForm = (formData) => {
   }
   
   // Validate slideshow images for slideshow type articles
-  if (Object.keys(formData).includes('type') && formData.type === 'SS' && (!formData.slideshow_images || formData.slideshow_images.length < 1)) {
+  if (Object.keys(formData).includes('type') && formData.type === 'SS' && (!formData.slideshow_images || formData.slideshow_images.length < 1) && articleDetails.slideshow_images.length < 1) {
     errors.slideshow_images = 'لطفا حداقل یک تصویر برای اسلایدشو انتخاب کنید';
   }
   

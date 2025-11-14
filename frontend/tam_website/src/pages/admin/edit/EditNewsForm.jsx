@@ -15,7 +15,7 @@ import SlideshowImages from '../../../components/admin/SlideshowImages';
 import ImportTranslationModal from '../../../components/admin/Modal/ImportTranslationModal';
 // import SchedulePublishModal from '../../../components/admin/Modal/SchedulePublishModal';
 import { ArticleFormIcons } from '../../../data/Icons';
-import { formatJalaliDateTime } from '../../../utils/dateUtils';
+// import { formatJalaliDateTime } from '../../../utils/dateUtils';
 
 
 const EditNewsForm = () => {
@@ -325,11 +325,7 @@ const EditNewsForm = () => {
         ...formData,
         main_image: formData.main_image || mainImagePreview,
         slideshow_images: slideshowImages.filter(img => img.file).map(img => img.file) // Only new files for validation
-    });
-    // Additionally validate existing slideshow images if type is 'SS' and no new files were added.
-    if (formData.type === 'SS' && slideshowImages.filter(img => img.file === null).length < 1 && formData.slideshow_images.length < 1) {
-        finalValidationErrors.slideshow_images = 'لطفا حداقل یک تصویر برای اسلایدشو انتخاب کنید';
-    }
+    }, articleDetails);
 
     setErrors(finalValidationErrors);
 
@@ -678,7 +674,7 @@ const EditNewsForm = () => {
                       return null;
                       })}
                   </select>
-                  {formData.status === 'DR' && (
+                  {/* {formData.status === 'DR' && (
                     <button
                     type="disable"
                     // onClick={() => setIsScheduleModalOpen(true)}
@@ -689,7 +685,7 @@ const EditNewsForm = () => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </button>
-                  )}
+                  )} */}
                 </div>
                 {errors.status && (
                 <p className="text-quaternary text-[14px] mt-1 text-right">{errors.status}</p>
