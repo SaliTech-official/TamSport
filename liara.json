@@ -8,7 +8,7 @@
       "timezone": "Asia/Tehran"
       
     },
-    "app": "django-tam-test",
+    "app": "tam-django",
     "disks": [
       {
         "name": "static",
