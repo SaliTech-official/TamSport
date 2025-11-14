@@ -1,0 +1,22 @@
+{
+    "platform": "django",
+    "django": {
+      "pythonVersion": "5.2.1",
+      "collectStatic": false,
+      "compileMessages": false,
+      "modifySettings": true,
+      "timezone": "Asia/Tehran"
+      
+    },
+    "app": "django-tam-test",
+    "disks": [
+      {
+        "name": "static",
+        "mountTo": "static"
+      },
+      {
+        "name": "media",
+        "mountTo": "media"
+      }
+    ]
+  }
