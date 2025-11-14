@@ -28,13 +28,19 @@ export default function Profile() {
     setUser(prev => ({ ...prev, ...updatedFields }));
   };
 
+  console.log(data, isLoading, isError);
+  
+
+  if (isError && data.errorContent.code == "user_not_found") {
+    return <SomethingWentWrong />;
+  }
+
+  
   if (isLoading || !user) {
     return <SpinLoader />;
   }
 
-  if (isError) {
-    return <SomethingWentWrong />;
-  }
+
 
   return (
     <div className="min-h-screen bg-quinary-tint-600 py-8 px-2">
