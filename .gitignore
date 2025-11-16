@@ -35,8 +35,6 @@ __pycache__/
 *.egg-info/
 
 ## Django
-./media/
-./static/
 ./*.log
 ./db.sqlite3*
 ./local_settings.py
