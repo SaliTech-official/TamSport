@@ -29,7 +29,7 @@ pillow==11.2.1
 prompt_toolkit==3.0.51
 PyJWT==2.9.0
 python-dateutil==2.9.0.post0
-rosetta==0.3
+# rosetta==0.3
 s3transfer==0.13.0
 six==1.17.0
 sqlparse==0.5.3
