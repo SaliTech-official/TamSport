@@ -1,0 +1,38 @@
+services:
+  database:
+    image: postgres:16
+    container_name: database
+    environment:
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+    volumes:
+      - tamdb_data:/var/lib/postgresql/data
+    networks:
+      - tam-network
+
+  backend:
+    build:
+      context: .
+      dockerfile: ./docker/django/Dockerfile
+    container_name: backend
+    env_file:
+      - ./.env
+    depends_on:
+      - database
+    networks:
+      - tam-network
+    ports:
+      - "8000:8000"
+    expose:
+      - "8000"
+    command: >
+      sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+
+
+volumes:
+  tamdb_data:
+
+
+networks:
+  tam-network:
