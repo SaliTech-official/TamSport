@@ -12,5 +12,11 @@
       "timezone": "Asia/Tehran"
       
     },
-    "app": "tam-django"
+    "app": "tam-django",
+    "disks": [
+      {
+        "name": "staticfiles",
+        "mountTo": "staticfiles"
+      }
+    ]
   }
