@@ -6,7 +6,7 @@
     "platform": "django",
     "django": {
       "pythonVersion": "3.12",
-      "collectStatic": true,
+      "collectStatic": false,
       "compileMessages": true,
       "modifySettings": true,
       "timezone": "Asia/Tehran"
