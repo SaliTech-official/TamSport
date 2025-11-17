@@ -43,3 +43,4 @@ postgres_data/
 # Others
 env
 .cursor
+node_modules
