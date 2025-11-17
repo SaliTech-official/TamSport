@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useNavigate, useParams } from 'react-router-dom';
 import useAdminHttp from '../../../hooks/useAdminHttp';
 import { successNotif, errorNotif } from '../../../utils/customNotifs';
-import AdminSomethingWentWrong from '../../adminUI/AdminSomethingWentWrong';
+import AdminSomethingWentWrong from '../../AdminUI/AdminSomethingWentWrong';
 import FormHeader from '../../../components/UI/FormHeader';
 import FormActions from '../../../components/UI/FormActions';
 import ChangePasswordModal from '../../../components/admin/Modal/ChangePasswordModal';
