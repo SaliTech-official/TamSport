@@ -5,9 +5,9 @@ import useAuth from '../hooks/useAuth';
 import SpinLoader from '../pages/UI/SpinLoader';
 import PageNotFound from '../pages/UI/PageNotFound';
 import { AdminIcons } from '../data/Icons';
-import AdminSomethingWentWrong from '../pages/adminUI/AdminSomethingWentWrong';
+import AdminSomethingWentWrong from '../pages/AdminUI/AdminSomethingWentWrong';
 import AccessDenied from '../pages/UI/AccessDenied';
-import AdminAccessDenied from '../pages/adminUI/AdminAccessDenied'
+import AdminAccessDenied from '../pages/AdminUI/AdminAccessDenied'
 
 const AdminLayout = () => {
   const { isAdminPannelAccess, logout, user } = useAuth(); // Get user from AuthContext
