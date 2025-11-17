@@ -1,10 +1,10 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-// Get initial language from localStorage or default to 'en'
+// Get initial language from localStorage or default to 'fa'
 const getInitialLanguage = () => {
   const savedLanguage = localStorage.getItem('language');
-  return savedLanguage || 'en';
+  return savedLanguage || 'fa';
 };
 
 // Common translations that should always be loaded
