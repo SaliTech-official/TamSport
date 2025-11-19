@@ -4,7 +4,6 @@ import os
 import environ
 from django.utils.translation import gettext_lazy as _
 from corsheaders.defaults import default_headers
-import dj_database_url
 
 
 
@@ -26,6 +25,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG', 'False')
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '')
+if ALLOWED_HOSTS == "*":
+    ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -102,7 +103,14 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # }
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv("DATABASE_URL"))
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DATABASE_NAME', 'postgres'),
+        'USER': os.getenv('DATABASE_USER', 'postgres'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD', ''),
+        'HOST': os.getenv('DATABASE_HOST', 'database'),
+        'PORT': os.getenv('DATABASE_PORT', '5432'),
+    }
 }
 
 # Password validation

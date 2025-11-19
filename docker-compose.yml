@@ -7,7 +7,7 @@ services:
       - POSTGRES_USER=${DATABASE_USER}
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
     volumes:
-      - tamdb_data:/var/lib/postgresql/data
+      - tam_dbpostgres:/var/lib/postgresql/data
     networks:
       - tam-network
 
@@ -31,7 +31,7 @@ services:
 
 
 volumes:
-  tamdb_data:
+  tam_dbpostgres:
 
 
 networks:
