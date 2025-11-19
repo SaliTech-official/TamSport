@@ -24,7 +24,7 @@ export const HomeProvider = ({ children }) => {
     isError,
     data: response,
     sendRequest
-  } = useHttp(`/api/blog/home-datas/`, false);
+  } = useHttp(`https://tam-django.liara.run/blog/home-datas/`, false);
 
   useEffect(() => {
     if (response) {
