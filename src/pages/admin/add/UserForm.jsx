@@ -7,6 +7,7 @@ import FormHeader from '../../../components/UI/FormHeader';
 import FormActions from '../../../components/UI/FormActions';
 import { validateUserForm, validateStrongPassword } from '../../../validators/UserValidators';
 import { authIcons } from '../../../data/Icons';
+import { API_PREFIX } from '../../../reverse_proxy';
 
 const UserForm = () => {
   const navigate = useNavigate();
@@ -109,7 +110,7 @@ const UserForm = () => {
     
     console.log(dataToSend);
     try {
-      const response = await sendRequest('/api/admin/user-create/', 'POST', dataToSend);
+      const response = await sendRequest(`${API_PREFIX}/admin/user-create/`, 'POST', dataToSend);
       console.log(response);
       
       if (response?.isError) {

@@ -6,6 +6,7 @@ import AdminPagination from '../../../components/admin/AdminPagination';
 import useAdminHttp from '../../../hooks/useAdminHttp';
 import SpinLoader from '../../../pages/UI/SpinLoader';
 import SomethingWentWrong from '../../../pages/UI/SomethingWentWrong';
+import { API_PREFIX } from '../../../reverse_proxy';
 
 const Teams = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const Teams = () => {
   const searchLanguage = searchParams.get('searchLanguage') || 'fa';
 
   // Fetch teams data
-  const url = `/api/admin/team-list/?page=${currentPage}&page_size=${itemsPerPage}${search ? `&search=${encodeURIComponent(search)}` : ''}${searchLanguage ? `&search_language=${searchLanguage}` : ''}`;
+  const url = `${API_PREFIX}/admin/team-list/?page=${currentPage}&page_size=${itemsPerPage}${search ? `&search=${encodeURIComponent(search)}` : ''}${searchLanguage ? `&search_language=${searchLanguage}` : ''}`;
   const {
     isLoading,
     data,

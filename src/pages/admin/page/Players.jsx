@@ -8,6 +8,7 @@ import AdminPagination from '../../../components/admin/AdminPagination';
 import useAdminHttp from '../../../hooks/useAdminHttp';
 import SpinLoader from '../../../pages/UI/SpinLoader';
 import SomethingWentWrong from '../../../pages/UI/SomethingWentWrong';
+import { API_PREFIX } from '../../../reverse_proxy';
 
 const Players = () => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const Players = () => {
   const position = searchParams.get('position') || '';
   
   // Fetch players data
-  const url = `/api/admin/players/?page=${currentPage}&page_size=${itemsPerPage}${search ? `&search=${encodeURIComponent(search)}` : ''}${position ? `&position=${position}` : ''}${searchLanguage ? `&search_language=${searchLanguage}` : ''}`;
+  const url = `${API_PREFIX}/admin/players/?page=${currentPage}&page_size=${itemsPerPage}${search ? `&search=${encodeURIComponent(search)}` : ''}${position ? `&position=${position}` : ''}${searchLanguage ? `&search_language=${searchLanguage}` : ''}`;
   const {
     isLoading,
     data,

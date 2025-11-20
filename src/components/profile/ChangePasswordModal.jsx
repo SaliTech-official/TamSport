@@ -4,6 +4,7 @@ import ProfileModal from './ProfileModal';
 import { validateStrongPassword } from '../../validators/UserValidators';
 import useAdminHttp from '../../hooks/useAdminHttp';
 import { successNotif, errorNotif } from '../../utils/customNotifs';
+import { API_PREFIX } from '../../reverse_proxy';
 
 export default function ChangePasswordModal({ isOpen, onClose }) {
   const { t } = useTranslation(['profile', 'validation']);
@@ -54,7 +55,7 @@ export default function ChangePasswordModal({ isOpen, onClose }) {
     try {
       const payload = { old_password: fields.old_password, new_password: fields.new_password };
       const res = await sendRequest(
-        '/api/blog/change_password/',
+        `${API_PREFIX}/blog/change_password/`,
         'PATCH',
         payload
       );

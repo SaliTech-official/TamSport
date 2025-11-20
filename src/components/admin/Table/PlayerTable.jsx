@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import useAdminHttp from '../../../hooks/useAdminHttp';
 import DeletePlayerModal from '../Modal/DeletePlayerModal';
+import { API_PREFIX } from '../../../reverse_proxy';
 
 const PlayerTable = ({ navigate, players, getPlayers, currentPage, totalItems, onPageChangeAfterDelete }) => {
   // Delete player state
@@ -29,7 +30,7 @@ const PlayerTable = ({ navigate, players, getPlayers, currentPage, totalItems, o
     setIsDeleting(true);
   
     try {
-      await sendRequest(`/api/admin/player-delete/${playerToDelete.id}/`, 'DELETE');
+      await sendRequest(`${API_PREFIX}/admin/player-delete/${playerToDelete.id}/`, 'DELETE');
   
       setDeleteModalOpen(false);
       setPlayerToDelete(null);

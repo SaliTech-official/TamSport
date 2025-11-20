@@ -4,6 +4,7 @@ import DeactivateUserModal from '../Modal/DeactivateUserModal';
 import ActivateUserModal from '../Modal/ActivateUserModal';
 import FinalWarningModal from '../Modal/FinalWarningModal'; // New import
 import useAuth from '../../../hooks/useAuth'; // New import
+import { API_PREFIX } from '../../../reverse_proxy';
 
 const UsersTable = ({ navigate, users, getUsers, currentPage, totalItems, onPageChangeAfterDeactivate }) => {
   const { user: currentUser } = useAuth(); // Get current logged-in user
@@ -69,7 +70,7 @@ const UsersTable = ({ navigate, users, getUsers, currentPage, totalItems, onPage
     setIsConfirmingSelfDeactivation(true); 
 
     try {
-      const url = `/api/admin/user-deactivate/${userToDeactivate.id}/${isFinalConfirmation ? '?force_deactivate=true' : ''}`;
+      const url = `${API_PREFIX}/admin/user-deactivate/${userToDeactivate.id}/${isFinalConfirmation ? '?force_deactivate=true' : ''}`;
       const response = await sendRequest(url, 'PATCH', { is_active: false });
 
       if (response && response?.self_deactivation_pending) {
@@ -99,7 +100,7 @@ const UsersTable = ({ navigate, users, getUsers, currentPage, totalItems, onPage
     setIsActivating(true);
 
     try {
-      await sendRequest(`/api/admin/user-deactivate/${userToActivate.id}/`, 'PATCH', { is_active: true });
+      await sendRequest(`${API_PREFIX}/admin/user-deactivate/${userToActivate.id}/`, 'PATCH', { is_active: true });
 
       setActivateModalOpen(false);
       setUserToActivate(null);

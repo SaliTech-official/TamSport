@@ -15,6 +15,7 @@ import ImportTranslationModal from '../../../components/admin/Modal/ImportTransl
 import SchedulePublishModal from '../../../components/admin/Modal/SchedulePublishModal';
 import { ArticleFormIcons } from '../../../data/Icons';
 import { formatJalaliDateTime } from '../../../utils/dateUtils';
+import { API_PREFIX } from '../../../reverse_proxy';
 
 const NewsForm = () => {
   const navigate = useNavigate();
@@ -50,7 +51,7 @@ const NewsForm = () => {
     data: filterData,
     isLoading: filterLoading,
     isError: filterError
-  } = useAdminHttp('/api/admin/article-filter-data/');
+  } = useAdminHttp(`${API_PREFIX}/admin/article-filter-data/`);
   
   const {
     isLoading: submitLoading,
@@ -248,7 +249,7 @@ const NewsForm = () => {
     formDataToSend.append('slideshow_image_count', formData.slideshow_images.length);
 
     try {
-      const response = await sendRequest('/api/admin/article-create/', 'POST', formDataToSend);
+      const response = await sendRequest(`${API_PREFIX}/admin/article-create/`, 'POST', formDataToSend);
       if (response?.isError) {
         // Set backend errors and merge with any existing ones
         const backendErrors = response?.errorContent || {};

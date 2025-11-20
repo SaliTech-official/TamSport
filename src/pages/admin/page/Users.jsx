@@ -8,6 +8,7 @@ import AdminPagination from '../../../components/admin/AdminPagination';
 import useAdminHttp from '../../../hooks/useAdminHttp';
 import SpinLoader from '../../../pages/UI/SpinLoader';
 import SomethingWentWrong from '../../../pages/UI/SomethingWentWrong';
+import { API_PREFIX } from '../../../reverse_proxy';
 
 const Users = () => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const Users = () => {
   const isActive = searchParams.get('isActive') || '';
 
   // Fetch users data
-  const url = `/api/admin/users/?page=${currentPage}&page_size=${itemsPerPage}${search ? `&search=${encodeURIComponent(search)}` : ''}${userType ? `&user_type=${userType}` : ''}${isActive ? `&is_active=${isActive}` : ''}`;
+  const url = `${API_PREFIX}/admin/users/?page=${currentPage}&page_size=${itemsPerPage}${search ? `&search=${encodeURIComponent(search)}` : ''}${userType ? `&user_type=${userType}` : ''}${isActive ? `&is_active=${isActive}` : ''}`;
   const { isLoading, data, isError, errorContent, sendRequest: getUsers } = useAdminHttp(url);
   
   // Update users and pagination info when data changes

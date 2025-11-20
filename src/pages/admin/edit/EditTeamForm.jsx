@@ -9,6 +9,7 @@ import AdminTeamNotFound from '../../AdminUI/AdminTeamNotFound';
 import FormHeader from '../../../components/UI/FormHeader';
 import ImagePicker from '../../../components/UI/ImagePicker';
 import FormActions from '../../../components/UI/FormActions';
+import { API_PREFIX } from '../../../reverse_proxy';
 
 const EditTeamForm = () => {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ const EditTeamForm = () => {
     isError: fetchError,
     data: teamDetails,
     sendRequest: fetchTeamDetails
-  } = useAdminHttp(`/api/admin/team-detail/${teamId}/`);
+  } = useAdminHttp(`${API_PREFIX}/admin/team-detail/${teamId}/`);
 
   const {
     isLoading: submitLoading,
@@ -118,7 +119,7 @@ const EditTeamForm = () => {
     }
 
     try {
-      const response = await submitUpdate(`/api/admin/team-update/${teamId}/`, 'PATCH', formDataToSend);
+      const response = await submitUpdate(`${API_PREFIX}/admin/team-update/${teamId}/`, 'PATCH', formDataToSend);
       if (response?.isError) {
         // Set backend errors and merge with any existing ones
         const backendErrors = response?.errorContent || {};

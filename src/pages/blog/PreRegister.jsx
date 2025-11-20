@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { successNotif, errorNotif } from '../../utils/customNotifs'; // Import errorNotif
 import useAdminHttp from '../../hooks/useAdminHttp'; // Import useAdminHttp
-import domainUrl from '../../utils/api'; // Import domainUrl
+import { API_PREFIX } from '../../reverse_proxy';
 
 const sportOptions = [
   { value: '', label: '' },
@@ -62,7 +62,7 @@ export default function PreRegister() {
     if (!validate()) return;
 
     try {
-      const response = await sendRequest(`/api/blog/pre-register-player/`, 'POST', fields);
+      const response = await sendRequest(`${API_PREFIX}/blog/pre-register-player/`, 'POST', fields);
       if (response?.error) { // Check for custom error from backend
         errorNotif(t('sendEmailFailed', { ns: 'preRegister' }));
       } else if (response?.message) { // Check for success message

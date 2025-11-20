@@ -3,6 +3,7 @@ import useAdminHttp from '../../../hooks/useAdminHttp';
 import SpinLoader from '../../../pages/UI/SpinLoader';
 import SomethingWentWrong from '../../../pages/UI/SomethingWentWrong';
 import { AdminIcons } from '../../../data/Icons';
+import { API_PREFIX } from '../../../reverse_proxy';
 
 const UsersFilter = ({
   search,
@@ -24,7 +25,7 @@ const UsersFilter = ({
 
   // Fetch filter options from backend
   const { data: filterData, isLoading: filterLoading, isError: filterError } = useAdminHttp(
-    '/api/admin/user-filter-data/'
+    `${API_PREFIX}/admin/user-filter-data/`
   );
 
   // Initialize search input when search prop changes

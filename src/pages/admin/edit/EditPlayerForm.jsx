@@ -9,6 +9,7 @@ import FormHeader from '../../../components/UI/FormHeader';
 import ImagePicker from '../../../components/UI/ImagePicker';
 import FormActions from '../../../components/UI/FormActions';
 import { validatePlayerForm } from '../../../validators/PlayerValidators';
+import { API_PREFIX } from '../../../reverse_proxy';
 
 const EditPlayerForm = () => {
   const navigate = useNavigate();
@@ -33,14 +34,14 @@ const EditPlayerForm = () => {
   
   const {
     data: positions,
-  } = useAdminHttp('/api/admin/player-positions/');
+  } = useAdminHttp(`${API_PREFIX}/admin/player-positions/`);
   
   const {
     data: playerDetails,
     isLoading: playerDetailsLoading,
     isError: playerDetailsError,
     sendRequest: fetchPlayers,
-  } = useAdminHttp(`/api/admin/player-detail/${playerId}/`);
+  } = useAdminHttp(`${API_PREFIX}/admin/player-detail/${playerId}/`);
   
   const {
     isLoading: submitLoading,
@@ -171,7 +172,7 @@ const EditPlayerForm = () => {
     }
 
     try {
-      const response = await sendRequest(`/api/admin/player-update/${playerId}/`, 'PATCH', formDataToSend);
+      const response = await sendRequest(`${API_PREFIX}/admin/player-update/${playerId}/`, 'PATCH', formDataToSend);
       if (response?.isError) {
         // Set backend errors and merge with any existing ones
         const backendErrors = response?.errorContent || {};

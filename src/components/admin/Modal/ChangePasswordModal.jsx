@@ -4,6 +4,7 @@ import useAdminHttp from '../../../hooks/useAdminHttp';
 import { successNotif, errorNotif } from '../../../utils/customNotifs';
 import { validateChangePassword } from '../../../validators/UserValidators';
 import { authIcons } from '../../../data/Icons';
+import { API_PREFIX } from '../../../reverse_proxy';
 
 const ChangePasswordModal = ({
   isOpen,
@@ -51,7 +52,7 @@ const ChangePasswordModal = ({
     }
 
     try {
-      const response = await sendRequest(`/api/admin/user-change-password/${userId}/`, 'PATCH', {
+      const response = await sendRequest(`${API_PREFIX}/admin/user-change-password/${userId}/`, 'PATCH', {
         new_password: newPassword,
         repeat_password: repeatPassword,
       });

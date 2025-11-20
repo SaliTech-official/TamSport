@@ -3,6 +3,7 @@ import useAdminHttp from '../../../hooks/useAdminHttp';
 import SpinLoader from '../../../pages/UI/SpinLoader';
 import SomethingWentWrong from '../../../pages/UI/SomethingWentWrong';
 import { AdminIcons } from '../../../data/Icons';
+import { API_PREFIX } from '../../../reverse_proxy';
 
 const NewsFilter = ({ 
   search, 
@@ -26,7 +27,7 @@ const NewsFilter = ({
     data: filterData,
     isLoading: filterLoading,
     isError: filterError
-  } = useAdminHttp('/api/admin/article-filter-data/?filter_page=True');
+  } = useAdminHttp(`${API_PREFIX}/admin/article-filter-data/?filter_page=True`);
 
   // Initialize search input when search prop changes
   useEffect(() => {

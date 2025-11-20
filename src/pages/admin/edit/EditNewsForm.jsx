@@ -16,6 +16,7 @@ import ImportTranslationModal from '../../../components/admin/Modal/ImportTransl
 import SchedulePublishModal from '../../../components/admin/Modal/SchedulePublishModal';
 import { ArticleFormIcons } from '../../../data/Icons';
 import { formatJalaliDateTime } from '../../../utils/dateUtils';
+import { API_PREFIX } from '../../../reverse_proxy';
 
 
 const EditNewsForm = () => {
@@ -57,13 +58,13 @@ const EditNewsForm = () => {
     isLoading: articleDetailsLoading,
     isError: articleDetailsError,
     sendRequest: fetchArticleDetails
-  } = useAdminHttp(`/api/admin/article-detail/${articleId}/`);
+  } = useAdminHttp(`${API_PREFIX}/admin/article-detail/${articleId}/`);
   
   const {
     data: filterData,
     isLoading: filterLoading,
     isError: filterError
-  } = useAdminHttp('/api/admin/article-filter-data/');
+  } = useAdminHttp(`${API_PREFIX}/admin/article-filter-data/`);
   
   const {
     isLoading: submitLoading,
@@ -372,7 +373,7 @@ const EditNewsForm = () => {
     
 
     try {
-      const response = await sendRequest(`/api/admin/article-update/${articleId}/`, 'PATCH', formDataToSend);
+      const response = await sendRequest(`${API_PREFIX}/admin/article-update/${articleId}/`, 'PATCH', formDataToSend);
       
       if (response?.isError) {
         const backendErrors = response?.errorContent || {};

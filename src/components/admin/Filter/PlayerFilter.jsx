@@ -3,6 +3,7 @@ import useAdminHttp from '../../../hooks/useAdminHttp';
 import SpinLoader from '../../../pages/UI/SpinLoader';
 import SomethingWentWrong from '../../../pages/UI/SomethingWentWrong';
 import { AdminIcons } from '../../../data/Icons';
+import { API_PREFIX } from '../../../reverse_proxy';
 
 const PlayerFilter = ({ 
   search, 
@@ -22,7 +23,7 @@ const PlayerFilter = ({
     data: positionsData,
     isLoading: positionsLoading,
     isError: positionsError
-  } = useAdminHttp('/api/admin/player-positions/');
+  } = useAdminHttp(`${API_PREFIX}/admin/player-positions/`);
 
   // Initialize search input when search prop changes
   useEffect(() => {

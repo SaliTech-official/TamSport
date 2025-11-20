@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { AdminIcons } from '../../../data/Icons';
 import { FaEye, FaHeart } from 'react-icons/fa';
 import { AuthContext } from '../../../context/AuthContext';
+import { API_PREFIX } from '../../../reverse_proxy';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const Dashboard = () => {
     data: dashboardData,
     isLoading: dashboardLoading,
     isError: dashboardError,
-  } = useAdminHttp(`/api/admin/admin-dashboard-data/`);
+  } = useAdminHttp(`${API_PREFIX}/admin/admin-dashboard-data/`);
 
   if (dashboardLoading) {
     return <SpinLoader />;

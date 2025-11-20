@@ -9,6 +9,7 @@ import FormActions from '../../../components/UI/FormActions';
 import ChangePasswordModal from '../../../components/admin/Modal/ChangePasswordModal';
 import { validateUserForm } from '../../../validators/UserValidators';
 import { formatGregorianDateTime, parseISODate } from '../../../utils/dateUtils';
+import { API_PREFIX } from '../../../reverse_proxy';
 
 const EditUserForm = () => {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ const EditUserForm = () => {
     isLoading: userDetailsLoading,
     isError: userDetailsError,
     sendRequest: fetchUser,
-  } = useAdminHttp(`/api/admin/user-detail/${userId}/`);
+  } = useAdminHttp(`${API_PREFIX}/admin/user-detail/${userId}/`);
   
   const { 
     isLoading: submitLoading,
@@ -115,7 +116,7 @@ const EditUserForm = () => {
     });
     
     try {
-      const response = await sendRequest(`/api/admin/user-update/${userId}/`, 'PATCH', dataToSend);
+      const response = await sendRequest(`${API_PREFIX}/admin/user-update/${userId}/`, 'PATCH', dataToSend);
       if (response?.isError) {
         // Set backend errors and merge with any existing ones
         const backendErrors = response?.errorContent || {};

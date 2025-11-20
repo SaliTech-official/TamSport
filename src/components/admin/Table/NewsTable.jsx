@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import useAdminHttp from '../../../hooks/useAdminHttp';
 import DeleteArticleModal from '../Modal/DeleteNewsModal';
+import { API_PREFIX } from '../../../reverse_proxy';
 
 const NewsTable = ({ navigate, articles, getArticles, currentPage, totalItems, onPageChangeAfterDelete }) => {
   // Delete article state
@@ -29,7 +30,7 @@ const NewsTable = ({ navigate, articles, getArticles, currentPage, totalItems, o
     setIsDeleting(true);
   
     try {
-      await sendRequest(`/api/admin/article-delete/${articleToDelete.id}/`, 'DELETE');
+      await sendRequest(`${API_PREFIX}/admin/article-delete/${articleToDelete.id}/`, 'DELETE');
   
       setDeleteModalOpen(false);
       setArticleToDelete(null);

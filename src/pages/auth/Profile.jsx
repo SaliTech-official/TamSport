@@ -7,6 +7,7 @@ import useAdminHttp from '../../hooks/useAdminHttp';
 import { errorNotif } from '../../utils/customNotifs';
 import SomethingWentWrong from '../UI/SomethingWentWrong';
 import SpinLoader from '../UI/SpinLoader';
+import { API_PREFIX } from '../../reverse_proxy';
 
 export default function Profile() {
   const { t } = useTranslation('profile');
@@ -14,7 +15,7 @@ export default function Profile() {
   const [user, setUser] = useState(null);
   const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
 
-  const { data, isLoading, isError, sendRequest } = useAdminHttp('/api/auth/user/');
+  const { data, isLoading, isError, sendRequest } = useAdminHttp(`${API_PREFIX}/auth/user/`);
 
   useEffect(() => {
     if (data && !data.isError) {

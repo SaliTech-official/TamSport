@@ -9,6 +9,7 @@ import SomethingWentWrong from '../../pages/UI/SomethingWentWrong'
 import NoArticlesFound from '../../pages/UI/NoArticlesFound'
 import useHttp from '../../hooks/useHttp'
 import FilterSummary from '../../components/FilterSummary'
+import { API_PREFIX } from '../../reverse_proxy'
 
 export default function News() {
   const { t, i18n } = useTranslation();
@@ -35,7 +36,7 @@ export default function News() {
     const currentPageParam = params.get('page');
     params.delete('page'); // Always start fresh with page 1 if filters change
 
-    let searchUrl = `/api/blog/articles`
+    let searchUrl = `${API_PREFIX}/blog/articles`
     let searchParams = new URLSearchParams();
     if (searchParam) {
       searchParams.set('search', searchParam);
@@ -123,7 +124,7 @@ export default function News() {
     // Also keep selectedTeam in sync with URL (valid numeric or empty)
     setSelectedTeam(teamParam && !isNaN(parseInt(teamParam)) ? teamParam : '');
 
-    let newSearchUrl = `/api/blog/articles`
+    let newSearchUrl = `${API_PREFIX}/blog/articles`
     let newSearchParams = new URLSearchParams();
     if (searchParam) {
       newSearchParams.set('search', searchParam);
@@ -169,7 +170,9 @@ export default function News() {
       const newSearchParams = params.toString();
       window.history.replaceState({}, '', `${window.location.pathname}?${newSearchParams}`);
       setCurrentSearchParams(newSearchParams); // Update the state to trigger useEffect
-      setRequestUrl(response.next);
+      // Handle response.next - if it's a relative URL, prepend API_PREFIX, otherwise use as is
+      const nextUrl = response.next?.startsWith('https') ? response.next : `${API_PREFIX}${response.next}`;
+      setRequestUrl(nextUrl);
     }
   };
 

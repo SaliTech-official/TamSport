@@ -7,6 +7,7 @@ import { validatePlayerForm } from '../../../validators/PlayerValidators'; // Re
 import FormHeader from '../../../components/UI/FormHeader';
 import ImagePicker from '../../../components/UI/ImagePicker';
 import FormActions from '../../../components/UI/FormActions';
+import { API_PREFIX } from '../../../reverse_proxy';
 
 
 const PlayerForm = () => {
@@ -34,7 +35,7 @@ const PlayerForm = () => {
   
   const {
     data: positions
-  } = useAdminHttp('/api/admin/player-positions/');
+  } = useAdminHttp(`${API_PREFIX}/admin/player-positions/`);
   
   const {
     isLoading: submitLoading,
@@ -106,7 +107,7 @@ const PlayerForm = () => {
     });
 
     try {
-      const response = await sendRequest('/api/admin/player-create/', 'POST', formDataToSend);
+      const response = await sendRequest(`${API_PREFIX}/admin/player-create/`, 'POST', formDataToSend);
       if (response?.isError) {
         // Set backend errors and merge with any existing ones
         const backendErrors = response?.errorContent || {};
