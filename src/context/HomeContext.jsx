@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import useHttp from '../hooks/useHttp';
+import { API_PREFIX } from '../reverse_proxy';
 
 const HomeContext = createContext();
 
@@ -24,7 +25,7 @@ export const HomeProvider = ({ children }) => {
     isError,
     data: response,
     sendRequest
-  } = useHttp(`/api/blog/home-datas/`, false);
+  } = useHttp(`${API_PREFIX}/blog/home-datas/`, false);
 
   useEffect(() => {
     if (response) {
