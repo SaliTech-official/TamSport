@@ -1,10 +1,12 @@
-@import "tailwindcss";
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+@import "tailwindcss";
+
+
 @theme {
   /* Font families as variables if needed */
+  --font-vazir: 'Vazirmatn', sans-serif;
   --font-sans: 'Inter', 'Vazirmatn', sans-serif;
 
   /* Primary colors */
@@ -117,7 +119,7 @@
 
 @layer base {
   html {
-    font-family: var(--font-sans);
+    font-family: var(--font-vazir);
   }
 
   :lang(fa) {
