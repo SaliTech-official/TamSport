@@ -1,0 +1,22 @@
+{
+    "port":80,
+    "build":{
+      "location":"iran"
+    },
+    "platform": "django",
+    "django": {
+      "pythonVersion": "3.12",
+      "collectStatic": false,
+      "compileMessages": true,
+      "modifySettings": true,
+      "timezone": "Asia/Tehran"
+      
+    },
+    "app": "tam-django",
+    "disks": [
+      {
+        "name": "staticfiles",
+        "mountTo": "staticfiles"
+      }
+    ]
+  }
