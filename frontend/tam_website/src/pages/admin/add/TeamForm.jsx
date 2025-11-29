@@ -74,7 +74,7 @@ const TeamForm = () => {
       formDataToSend.append(key, value);
     });
     try {
-      const response = await sendRequest('http://localhost:8000/api/admin/team-create/', 'POST', formDataToSend);
+      const response = await sendRequest('/api/admin/team-create/', 'POST', formDataToSend);
       if (response?.isError) {
         setErrors(response?.errorContent || {});
         errorNotif('خطا در ایجاد تیم');

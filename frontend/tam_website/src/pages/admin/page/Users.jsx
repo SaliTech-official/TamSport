@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useSearchParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import UsersTable from '../../../components/admin/Table/UsersTable';
-import UsersFilter from '../../../components/admin/Filter/UsersFIlter';
+import UsersFilter from '../../../components/admin/Filter/UsersFilter';
 import AdminPagination from '../../../components/admin/AdminPagination';
 import useAdminHttp from '../../../hooks/useAdminHttp';
 import SpinLoader from '../../../pages/UI/SpinLoader';
@@ -23,7 +23,7 @@ const Users = () => {
   const isActive = searchParams.get('isActive') || '';
 
   // Fetch users data
-  const url = `http://localhost:8000/api/admin/users/?page=${currentPage}&page_size=${itemsPerPage}${search ? `&search=${encodeURIComponent(search)}` : ''}${userType ? `&user_type=${userType}` : ''}${isActive ? `&is_active=${isActive}` : ''}`;
+  const url = `/api/admin/users/?page=${currentPage}&page_size=${itemsPerPage}${search ? `&search=${encodeURIComponent(search)}` : ''}${userType ? `&user_type=${userType}` : ''}${isActive ? `&is_active=${isActive}` : ''}`;
   const { isLoading, data, isError, errorContent, sendRequest: getUsers } = useAdminHttp(url);
   
   // Update users and pagination info when data changes

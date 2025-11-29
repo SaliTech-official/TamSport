@@ -109,7 +109,7 @@ const UserForm = () => {
     
     console.log(dataToSend);
     try {
-      const response = await sendRequest('http://localhost:8000/api/admin/user-create/', 'POST', dataToSend);
+      const response = await sendRequest('/api/admin/user-create/', 'POST', dataToSend);
       console.log(response);
       
       if (response?.isError) {

@@ -29,7 +29,7 @@ const NewsTable = ({ navigate, articles, getArticles, currentPage, totalItems, o
     setIsDeleting(true);
   
     try {
-      await sendRequest(`http://localhost:8000/api/admin/article-delete/${articleToDelete.id}/`, 'DELETE');
+      await sendRequest(`/api/admin/article-delete/${articleToDelete.id}/`, 'DELETE');
   
       setDeleteModalOpen(false);
       setArticleToDelete(null);

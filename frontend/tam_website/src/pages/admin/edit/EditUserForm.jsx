@@ -37,7 +37,7 @@ const EditUserForm = () => {
     isLoading: userDetailsLoading,
     isError: userDetailsError,
     sendRequest: fetchUser,
-  } = useAdminHttp(`http://localhost:8000/api/admin/user-detail/${userId}/`);
+  } = useAdminHttp(`/api/admin/user-detail/${userId}/`);
   
   const { 
     isLoading: submitLoading,
@@ -115,7 +115,7 @@ const EditUserForm = () => {
     });
     
     try {
-      const response = await sendRequest(`http://localhost:8000/api/admin/user-update/${userId}/`, 'PATCH', dataToSend);
+      const response = await sendRequest(`/api/admin/user-update/${userId}/`, 'PATCH', dataToSend);
       if (response?.isError) {
         // Set backend errors and merge with any existing ones
         const backendErrors = response?.errorContent || {};

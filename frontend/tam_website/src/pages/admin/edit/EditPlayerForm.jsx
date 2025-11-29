@@ -33,14 +33,14 @@ const EditPlayerForm = () => {
   
   const {
     data: positions,
-  } = useAdminHttp('http://localhost:8000/api/admin/player-positions/');
+  } = useAdminHttp('/api/admin/player-positions/');
   
   const {
     data: playerDetails,
     isLoading: playerDetailsLoading,
     isError: playerDetailsError,
     sendRequest: fetchPlayers,
-  } = useAdminHttp(`http://localhost:8000/api/admin/player-detail/${playerId}/`);
+  } = useAdminHttp(`/api/admin/player-detail/${playerId}/`);
   
   const {
     isLoading: submitLoading,
@@ -171,7 +171,7 @@ const EditPlayerForm = () => {
     }
 
     try {
-      const response = await sendRequest(`http://localhost:8000/api/admin/player-update/${playerId}/`, 'PATCH', formDataToSend);
+      const response = await sendRequest(`/api/admin/player-update/${playerId}/`, 'PATCH', formDataToSend);
       if (response?.isError) {
         // Set backend errors and merge with any existing ones
         const backendErrors = response?.errorContent || {};

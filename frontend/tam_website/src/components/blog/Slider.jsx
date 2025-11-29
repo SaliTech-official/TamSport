@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 const Slider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [
-    // { id: 1, image: "/images/banners/banner2.jpg" },
-    { id: 2, image: "/images/banners/banner4.jpg" },
-    // { id: 3, image: "/images/banners/SliderPhoto.jpg" }
+    { id: 1, image: "/images/banners/tam_academy.jpg" },
+    { id: 2, image: "/images/banners/tam_isfahan.jpg" },
+    { id: 3, image: "/images/banners/the_ceo_of_tam.jpg" }
   ];
 
   useEffect(() => {

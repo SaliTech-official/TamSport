@@ -51,7 +51,7 @@ const ChangePasswordModal = ({
     }
 
     try {
-      const response = await sendRequest(`http://localhost:8000/api/admin/user-change-password/${userId}/`, 'PATCH', {
+      const response = await sendRequest(`/api/admin/user-change-password/${userId}/`, 'PATCH', {
         new_password: newPassword,
         repeat_password: repeatPassword,
       });

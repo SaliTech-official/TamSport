@@ -7,7 +7,7 @@ import PageNotFound from '../pages/UI/PageNotFound';
 import { AdminIcons } from '../data/Icons';
 import AdminSomethingWentWrong from '../pages/adminUI/AdminSomethingWentWrong';
 import AccessDenied from '../pages/UI/AccessDenied';
-import AdminAccessDenied from '../pages/AdminUI/AdminAccessDenied'
+import AdminAccessDenied from '../pages/adminUI/AdminAccessDenied'
 
 const AdminLayout = () => {
   const { isAdminPannelAccess, logout, user } = useAuth(); // Get user from AuthContext

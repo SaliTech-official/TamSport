@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import useAdminHttp from '../../../hooks/useAdminHttp';
-import DeleteTeamModal from '../modal/DeleteTeamModal';
+import DeleteTeamModal from '../Modal/DeleteTeamModal';
 
 const TeamTable = ({ navigate, teams, getTeams, currentPage, totalItems, onPageChangeAfterDelete }) => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -22,7 +22,7 @@ const TeamTable = ({ navigate, teams, getTeams, currentPage, totalItems, onPageC
     if (!teamToDelete) return;
     setIsDeleting(true);
     try {
-      await sendRequest(`http://localhost:8000/api/admin/team-delete/${teamToDelete.id}/`, 'DELETE');
+      await sendRequest(`/api/admin/team-delete/${teamToDelete.id}/`, 'DELETE');
       setDeleteModalOpen(false);
       setTeamToDelete(null);
       // After delete, handle page change if needed

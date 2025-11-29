@@ -1,19 +1,13 @@
 FROM python:3.10-slim
 
-EXPOSE 8000
+WORKDIR /app
 
-# Prevent .pyc files and enable unbuffered logs
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1 
-
-# Install only necessary system dependencies (PostgreSQL & i18n)
-RUN apt-get update && apt-get install -y  \
+RUN apt-get update && apt-get install -y \
     libpq-dev \
     gettext \
     gcc \
+    libpq5 \
     && rm -rf /var/lib/apt/lists/*
-
-WORKDIR /app
 
 # Install Python dependencies
 COPY ./backend/requirements.txt .
@@ -22,3 +16,11 @@ RUN pip install --no-cache-dir --upgrade pip && \
 
 # Copy project code
 COPY ./backend/tam_website/ .
+
+EXPOSE 8000
+
+# Create non-root user
+RUN useradd -m appuser
+USER appuser
+
+CMD ["sh", "-c", "python manage.py makemigrations && python manage.py migrate && gunicorn core.wsgi:application --bind 0.0.0.0:8000 --workers 3"]

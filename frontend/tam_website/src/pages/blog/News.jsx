@@ -2,18 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSearch } from '../../context/SearchContext'
 import { useNavigate } from 'react-router-dom'
-// Removed motion, AnimatePresence imports from 'framer-motion'
 import NewsFilter from '../../components/blog/NewsFilter'
 import NewsBox from '../../components/blog/NewsBox'
 import SpinLoader from '../../pages/UI/SpinLoader'
 import SomethingWentWrong from '../../pages/UI/SomethingWentWrong'
 import NoArticlesFound from '../../pages/UI/NoArticlesFound'
 import useHttp from '../../hooks/useHttp'
-import domainUrl from '../../utils/api'
 import FilterSummary from '../../components/FilterSummary'
-
-
-// Removed containerVariants and itemVariants definitions
 
 export default function News() {
   const { t, i18n } = useTranslation();
@@ -40,31 +35,32 @@ export default function News() {
     const currentPageParam = params.get('page');
     params.delete('page'); // Always start fresh with page 1 if filters change
 
-    const searchUrl = new URL(`http://${domainUrl}:8000/api/blog/articles`);
+    let searchUrl = `/api/blog/articles`
+    let searchParams = new URLSearchParams();
     if (searchParam) {
-      searchUrl.searchParams.set('search', searchParam);
+      searchParams.set('search', searchParam);
     }
     if (typeParam) {
-      searchUrl.searchParams.set('type', typeParam);
+      searchParams.set('type', typeParam);
     }
     // if (categoryParam) {
     //   searchUrl.searchParams.set('category', categoryParam);
     // }
     if (teamParam) { // This will now only be true if teamParam is a valid number string or non-empty
-      searchUrl.searchParams.set('team', teamParam);
+      searchParams.set('team', teamParam);
     }
 
     // Add page back if it was specifically for load more scenario (only 'page' param present)
     if (currentPageParam && params.toString() === '') {
-      searchUrl.searchParams.set('page', currentPageParam);
-      searchUrl.searchParams.set('fetch-all', 'true');
+      searchParams.set('page', currentPageParam);
+      searchParams.set('fetch-all', 'true');
     } else {
       // For new filters or refresh, always fetch page 1 initially
-      searchUrl.searchParams.set('page', '1');
-      searchUrl.searchParams.set('fetch-all', 'true'); // Always fetch all for now, as per pagination logic
+      searchParams.set('page', '1');
+      searchParams.set('fetch-all', 'true'); // Always fetch all for now, as per pagination logic
     }
 
-    return searchUrl.toString();
+    return `${searchUrl}?${searchParams.toString()}`;
   });
   const [allArticles, setAllArticles] = useState([]);
   const [selectedTeam, setSelectedTeam] = useState(() => {
@@ -72,7 +68,6 @@ export default function News() {
     // Also validate selectedTeam initial state
     return (teamFromUrl && !isNaN(parseInt(teamFromUrl))) ? teamFromUrl : '';
   });
-
 
   const activeFilter = new URLSearchParams(window.location.search).get("type");
   const searchParam = new URLSearchParams(window.location.search).get("search");
@@ -106,9 +101,13 @@ export default function News() {
     }
     params.delete('page'); // Reset page to 1 when changing filter
 
-    navigate(`${window.location.pathname}?${params.toString()}`);
+    const newSearchParams = params.toString();
+    navigate(`${window.location.pathname}?${newSearchParams}`);
+    setCurrentSearchParams(newSearchParams); // Update the state to trigger useEffect
     setAllArticles([]); // Clear articles to show new filtered results
   };
+
+  const [currentSearchParams, setCurrentSearchParams] = useState(window.location.search);
 
   // Effect to update articles when URL changes (after navigation)
   useEffect(() => {
@@ -124,28 +123,30 @@ export default function News() {
     // Also keep selectedTeam in sync with URL (valid numeric or empty)
     setSelectedTeam(teamParam && !isNaN(parseInt(teamParam)) ? teamParam : '');
 
-    const newSearchUrl = new URL(`http://${domainUrl}:8000/api/blog/articles`);
+    let newSearchUrl = `/api/blog/articles`
+    let newSearchParams = new URLSearchParams();
     if (searchParam) {
-      newSearchUrl.searchParams.set('search', searchParam);
+      newSearchParams.set('search', searchParam);
     }
     if (typeParam) {
-      newSearchUrl.searchParams.set('type', typeParam);
+      newSearchParams.set('type', typeParam);
     }
     if (categoryParam) {
-      newSearchUrl.searchParams.set('category', categoryParam);
+      newSearchParams.set('category', categoryParam);
     }
     if (teamParam) {
-      newSearchUrl.searchParams.set('team', teamParam);
+      newSearchParams.set('team', teamParam);
     }
     if (pageParam) {
-      newSearchUrl.searchParams.set('page', pageParam);
-      newSearchUrl.searchParams.set('fetch-all', 'true');
+      newSearchParams.set('page', pageParam);
+      newSearchParams.set('fetch-all', 'true');
     } else { // If pageParam is not present, ensure it's page 1 for new filter sets
-      newSearchUrl.searchParams.set('page', '1');
-      newSearchUrl.searchParams.set('fetch-all', 'true');
+      newSearchParams.set('page', '1');
+      newSearchParams.set('fetch-all', 'true');
     }
-    setRequestUrl(newSearchUrl.toString());
-  }, [window.location.search]); // Depend on window.location.search
+    setRequestUrl(`${newSearchUrl}?${newSearchParams.toString()}`);
+    setCurrentSearchParams(window.location.search);
+  }, [currentSearchParams]); // Depend on currentSearchParams state instead of window.location.search directly
 
   // This useEffect handles setting allArticles when response changes and clears articles
   // when response is null (e.g. on new filter apply)
@@ -165,7 +166,9 @@ export default function News() {
       const nextPage = parseInt(currentPage) + 1;
       const params = new URLSearchParams(window.location.search);
       params.set('page', nextPage.toString());
-      window.history.replaceState({}, '', `${window.location.pathname}?${params.toString()}`);
+      const newSearchParams = params.toString();
+      window.history.replaceState({}, '', `${window.location.pathname}?${newSearchParams}`);
+      setCurrentSearchParams(newSearchParams); // Update the state to trigger useEffect
       setRequestUrl(response.next);
     }
   };

@@ -26,7 +26,7 @@ const useAdminHttp = (url, options = null) => {
         return true;
       }
     } catch (err) {
-      console.error('Token refresh error:', err.message);
+      console.error('Token refresh error:');
     }
     return false;
   }, [refreshToken]);
@@ -53,7 +53,6 @@ const useAdminHttp = (url, options = null) => {
       headers,
     };
 
-    console.log("headers : ", headers);
     
 
     let response = await fetch(url, requestOptions);
@@ -65,7 +64,6 @@ const useAdminHttp = (url, options = null) => {
     } catch (err) {
       responseData = { message: 'Invalid JSON response from server.' };
     }
-    console.log(responseData);
 
     // Handle token expiration and retry
     if (response.status === 401 && responseData?.messages?.[0]?.message === 'Token is expired') {
@@ -94,7 +92,6 @@ const useAdminHttp = (url, options = null) => {
       };
     }
 
-    console.log("responseData:", responseData);
     
 
     if (!response.ok) {

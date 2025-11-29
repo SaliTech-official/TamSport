@@ -25,7 +25,7 @@ const News = () => {
   const team = searchParams.get('team') || '';
   
   // Fetch articles data
-  const url = `http://localhost:8000/api/admin/articles/?page=${currentPage}&page_size=${itemsPerPage}${search ? `&search=${encodeURIComponent(search)}` : ''}${status ? `&status=${status}` : ''}${type ? `&type=${type}` : ''}${team ? `&team=${team}` : ''}${searchLanguage ? `&search_language=${searchLanguage}` : ''}`;
+  const url = `/api/admin/articles/?page=${currentPage}&page_size=${itemsPerPage}${search ? `&search=${encodeURIComponent(search)}` : ''}${status ? `&status=${status}` : ''}${type ? `&type=${type}` : ''}${team ? `&team=${team}` : ''}${searchLanguage ? `&search_language=${searchLanguage}` : ''}`;
   const {
     isLoading,
     data,

@@ -24,7 +24,7 @@ const UsersFilter = ({
 
   // Fetch filter options from backend
   const { data: filterData, isLoading: filterLoading, isError: filterError } = useAdminHttp(
-    'http://localhost:8000/api/admin/user-filter-data/'
+    '/api/admin/user-filter-data/'
   );
 
   // Initialize search input when search prop changes

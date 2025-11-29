@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import useHttp from '../hooks/useHttp';
-import domainUrl from '../utils/api';
 
 const HomeContext = createContext();
 
@@ -25,7 +24,7 @@ export const HomeProvider = ({ children }) => {
     isError,
     data: response,
     sendRequest
-  } = useHttp(`http://${domainUrl}:8000/api/blog/home-datas/`, false);
+  } = useHttp(`/api/blog/home-datas/`, false);
 
   useEffect(() => {
     if (response) {

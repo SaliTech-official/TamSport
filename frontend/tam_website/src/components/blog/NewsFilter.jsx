@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import useHttp from '../../hooks/useHttp';
-import domainUrl from '../../utils/api';
 
 const NewsFilter = ({ activeFilter, onFilterChange, selectedTeam, onTeamChange, onApplyTeamFilter }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -15,7 +14,7 @@ const NewsFilter = ({ activeFilter, onFilterChange, selectedTeam, onTeamChange, 
   const [teamOptions, setTeamOptions] = useState([]);
 
   const { sendRequest: fetchFilterData, isLoading: isLoadingFilterData, isError: isErrorFilterData } = useHttp(
-    `http://${domainUrl}:8000/api/blog/article-filter-data`,
+    `/api/blog/article-filter-data`,
     true, // Send immediately on mount
     'GET'
   );
@@ -38,12 +37,9 @@ const NewsFilter = ({ activeFilter, onFilterChange, selectedTeam, onTeamChange, 
           }));
           setTeamOptions(formattedTeams);
 
-          console.log("Fetched filter data:", data);
-          console.log("Formatted Article Type Options:", formattedArticleTypes);
-          console.log("Formatted Team Options:", formattedTeams);
         }
       } catch (error) {
-        console.error("Failed to fetch filter data:", error);
+        console.error("Failed to fetch filter data:");
         // Handle error, e.g., show a message to the user
       }
     };
@@ -65,7 +61,6 @@ const NewsFilter = ({ activeFilter, onFilterChange, selectedTeam, onTeamChange, 
   }, []);
 
   const handleFilterClick = (filterId, filterType = 'type') => {
-    console.log(filterId, filterType);
     onFilterChange(filterId, filterType);
     setIsMobileMenuOpen(false);
   };

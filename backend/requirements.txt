@@ -43,3 +43,4 @@ django-celery-beat>=2.5.0
 django-filter>=23.1
 psycopg2>=2.9.10
 pytz>=2025.2
+gunicorn>=23.0.0

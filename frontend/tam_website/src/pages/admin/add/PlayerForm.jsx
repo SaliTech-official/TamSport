@@ -34,7 +34,7 @@ const PlayerForm = () => {
   
   const {
     data: positions
-  } = useAdminHttp('http://localhost:8000/api/admin/player-positions/');
+  } = useAdminHttp('/api/admin/player-positions/');
   
   const {
     isLoading: submitLoading,
@@ -106,7 +106,7 @@ const PlayerForm = () => {
     });
 
     try {
-      const response = await sendRequest('http://localhost:8000/api/admin/player-create/', 'POST', formDataToSend);
+      const response = await sendRequest('/api/admin/player-create/', 'POST', formDataToSend);
       if (response?.isError) {
         // Set backend errors and merge with any existing ones
         const backendErrors = response?.errorContent || {};

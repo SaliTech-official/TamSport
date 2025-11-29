@@ -24,7 +24,7 @@ export default function NewsDetail() {
     isError,
     errorMessage,
     data: article,
-  } = useHttp(`http://${domainUrl}:8000/api/blog/articles/${slug}`)
+  } = useHttp(`/api/blog/articles/${slug}`)
 
 
   // Initialize likeCount and isLiked when article data is received
@@ -35,7 +35,6 @@ export default function NewsDetail() {
     }
   }, [article])
 
-  console.log(errorMessage);
   
 
   if (isError && errorMessage?.detail === "No Article matches the given query.") {
@@ -61,7 +60,7 @@ export default function NewsDetail() {
       setIsLiked(!isLiked)
 
       // Make API call to toggle like
-      const response = await fetch(`http://${domainUrl}:8000/api/blog/article-like/${slug}`, {
+      const response = await fetch(`/api/blog/article-like/${slug}`, {
         method: 'GET',
       })
 
@@ -72,7 +71,7 @@ export default function NewsDetail() {
         throw new Error('Failed to toggle like')
       }
     } catch (error) {
-      console.error('Error toggling like:', error)
+      console.error('Error toggling like:')
     }
   }
 
