@@ -7,17 +7,17 @@ services:
       - POSTGRES_USER=${DATABASE_USER}
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
     volumes:
-      - tamdb_data:/var/lib/postgresql/data
+      - tam_postgs:/var/lib/postgresql/data
     networks:
       - tam-network
 
-  redis:
-    image: redis:7.2-alpine
-    container_name: redis
-    volumes:
-      - redis_data:/data
-    networks:
-      - tam-network
+  # redis:
+  #   image: redis:7.2-alpine
+  #   container_name: redis
+  #   volumes:
+  #     - redis_data:/data
+  #   networks:
+  #     - tam-network
 
   backend:
     build:
@@ -28,7 +28,6 @@ services:
       - ./.env
     depends_on:
       - database
-      - redis
     networks:
       - tam-network
     ports:
@@ -36,19 +35,19 @@ services:
     expose:
       - "8000"
 
-  celery:
-    build:
-      context: .
-      dockerfile: ./docker/django/Dockerfile
-    container_name: celery
-    command: celery -A core worker -l INFO
-    env_file:
-      - ./.env
-    depends_on:
-      - redis
-      - backend
-    networks:
-      - tam-network
+  # celery:
+  #   build:
+  #     context: .
+  #     dockerfile: ./docker/django/Dockerfile
+  #   container_name: celery
+  #   command: celery -A core worker -l INFO
+  #   env_file:
+  #     - ./.env
+  #   depends_on:
+  #     - redis
+  #     - backend
+  #   networks:
+  #     - tam-network
 
   frontend:
     build:
@@ -63,8 +62,8 @@ services:
       - backend
 
 volumes:
-  tamdb_data:
-  redis_data:
+  tam_postgs:
+
 
 networks:
   tam-network:

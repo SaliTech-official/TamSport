@@ -12,9 +12,9 @@ import ImagePicker from '../../../components/UI/ImagePicker';
 import FormActions from '../../../components/UI/FormActions';
 import SlideshowImages from '../../../components/admin/SlideshowImages';
 import ImportTranslationModal from '../../../components/admin/Modal/ImportTranslationModal';
-import SchedulePublishModal from '../../../components/admin/Modal/SchedulePublishModal';
+// import SchedulePublishModal from '../../../components/admin/Modal/SchedulePublishModal';
 import { ArticleFormIcons } from '../../../data/Icons';
-import { formatJalaliDateTime } from '../../../utils/dateUtils';
+// import { formatJalaliDateTime } from '../../../utils/dateUtils';
 
 const NewsForm = () => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const NewsForm = () => {
   const [mainImagePreview, setMainImagePreview] = useState(null);
   const [slideshowImages, setSlideshowImages] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
+  // const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
   const [scheduledPublishDate, setScheduledPublishDate] = useState(null);
   
   const [tabErrors, setTabErrors] = useState({
@@ -43,7 +43,7 @@ const NewsForm = () => {
     video_url: '',
     main_image: null,
     slideshow_images: [],
-    scheduled_publish_at: null
+    // scheduled_publish_at: null
   });
   
   const {
@@ -229,7 +229,7 @@ const NewsForm = () => {
     const formDataToSend = new FormData();
     
     Object.entries(formData).forEach(([key, value]) => {
-      if (key !== 'main_image' && key !== 'slideshow_images') {
+      if (key !== 'main_image' && key !== 'slideshow_images' && key !== 'scheduled_publish_at') {
         if (value !== null && value !== undefined) {
           formDataToSend.append(key, value);
         }
@@ -292,10 +292,10 @@ const NewsForm = () => {
     successNotif('متن ترجمه شده با موفقیت وارد شد.');
   };
   
-  const handleSchedulePublication = (scheduledDate) => {
-    setScheduledPublishDate(scheduledDate);
-    setFormData(prev => ({ ...prev, scheduled_publish_at: scheduledDate.toISOString() }));
-  };
+  // const handleSchedulePublication = (scheduledDate) => {
+  //   setScheduledPublishDate(scheduledDate);
+  //   setFormData(prev => ({ ...prev, scheduled_publish_at: scheduledDate.toISOString() }));
+  // };
 
   const tabs = [
     { id: 'persian', label: 'فارسی', lang: 'fa' },
@@ -539,29 +539,29 @@ const NewsForm = () => {
                       return null;
                       })}
                   </select>
-                  {formData.status === 'DR' && (
+                  {/* {formData.status === 'DR' && (
                     <button
-                      type="button"
-                      onClick={() => setIsScheduleModalOpen(true)}
+                      type="disable"
+                      // onClick={() => setIsScheduleModalOpen(true)}
                       className="flex-shrink-0 px-3 py-3 bg-quaternary text-white rounded-lg hover:bg-quaternary/90 transition-colors duration-300 mr-2"
-                      title="زمان‌بندی انتشار"
+                      title="از دسترس خارج"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </button>
-                  )}
+                  )} */}
                 </div>
                 {errors.status && (
                 <p className="text-quaternary text-[14px] mt-1 text-right">{errors.status}</p>
                 )}
-                {scheduledPublishDate && formData.status === 'DR' && (
+                {/* {scheduledPublishDate && formData.status === 'DR' && (
                   <div className="mt-2 p-2 bg-blue-50 border border-blue-200 rounded-md">
                     <p className="text-blue-600 text-sm">
                       زمان‌بندی شده برای انتشار در: {formatJalaliDateTime(scheduledPublishDate)}
                     </p>
                   </div>
-                )}
+                )} */}
               </div>
               {formData.type === 'VD' && (
                 <div>
@@ -614,12 +614,12 @@ const NewsForm = () => {
         onClose={() => setIsModalOpen(false)}
         onImport={handleImportTranslation}
       />
-      <SchedulePublishModal
+      {/* <SchedulePublishModal
         isOpen={isScheduleModalOpen}
         onClose={() => setIsScheduleModalOpen(false)}
         articleId={null} // For new articles, we'll handle scheduling in the form submission
         onSuccess={handleSchedulePublication}
-      />
+      /> */}
     </div>
   );
 };

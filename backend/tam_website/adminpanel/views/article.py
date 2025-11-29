@@ -10,7 +10,7 @@ from .base import BasePagination
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import status
 from django.utils import timezone
-from blog.tasks import publish_scheduled_article
+# from blog.tasks import publish_scheduled_article
 from permissions import *
 from django.utils.translation import get_language, gettext_lazy as _
 
@@ -210,7 +210,7 @@ def delete_article(request, article_id):
             status=status.HTTP_404_NOT_FOUND
         )
     except Exception as e:
-        print(f"DEBUG: Exception in schedule_article_publication: {e}") # New debug line
+        # print(f"DEBUG: Exception in schedule_article_publication: {e}") # New debug line
         return Response(
             {"error": str(e)}, 
             status=status.HTTP_500_INTERNAL_SERVER_ERROR

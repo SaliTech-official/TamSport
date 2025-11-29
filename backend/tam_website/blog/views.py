@@ -11,7 +11,7 @@ from accounts.mixins import LocalizationMixin, IpAddressMixin
 from .models import IpAddress
 from django_filters import rest_framework as filters
 from django.db.models import Count, Q, Case, When, Value, F
-from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
+# from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 from rest_framework.pagination import PageNumberPagination
 from .models import Team, Player
 from .serializers import TeamSerializer, PlayerSerializer
@@ -81,40 +81,40 @@ class ArticleFilter(filters.FilterSet):
 
     def filter_search(self, queryset, name, value):
         if value:
-            try:
+            # try:
                 # Get the current language from the request
-                language = self.request.META.get('HTTP_ACCEPT_LANGUAGE', 'fa')
+                # language = self.request.META.get('HTTP_ACCEPT_LANGUAGE', 'fa')
                 
                 # Use 'simple' configuration as a fallback if language-specific config doesn't exist
-                config = 'simple'
+                # config = 'simple'
                 
                 # Create search vectors for title and body
-                title_vector = SearchVector('translations__title', weight='A', config=config)
-                body_vector = SearchVector('translations__body', weight='B', config=config)
+                # title_vector = SearchVector('translations__title', weight='A', config=config)
+                # body_vector = SearchVector('translations__body', weight='B', config=config)
                 
                 # Combine vectors
-                search_vector = title_vector + body_vector
+                # search_vector = title_vector + body_vector
                 
                 # Create search query with proper escaping
-                search_query = SearchQuery(value, config=config)
+                # search_query = SearchQuery(value, config=config)
                 
                 # Perform the search with ranking
-                return queryset.filter(
-                    translations__language_code=language
-                ).annotate(
-                    rank=SearchRank(search_vector, search_query)
-                ).filter(
-                    rank__gt=0.3
-                ).order_by(
-                    '-rank',  # Sort by search rank first
-                    '-created_date'  # Then by creation date
-                ).distinct()
-            except Exception as e:
+                # return queryset.filter(
+                #     translations__language_code=language
+                # ).annotate(
+                #     rank=SearchRank(search_vector, search_query)
+                # ).filter(
+                #     rank__gt=0.3
+                # ).order_by(
+                #     '-rank',  # Sort by search rank first
+                #     '-created_date'  # Then by creation date
+                # ).distinct()
+            # except Exception as e:
                 # If search fails, fall back to simple contains search
-                return queryset.filter(
-                    Q(translations__title__icontains=value) |
-                    Q(translations__body__icontains=value)
-                ).distinct()
+            return queryset.filter(
+                Q(translations__title__icontains=value) |
+                Q(translations__body__icontains=value)
+            ).distinct()
             
         return queryset
 
@@ -462,7 +462,7 @@ class PlayerPreRegisterView(APIView):
         if not all([full_name, phone_number, age, sport]):
             return Response({'error': 'All fields are required.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        subject = 'Player Pre-Registration Form Submission'
+        subject = 'پیش ثبت نام سایت تام'
         message = (
             f'بازیکن جدید پیش ثبت نام کرد:\n'
             f'نام و نام خانوادگی: {full_name}\n'
@@ -472,7 +472,7 @@ class PlayerPreRegisterView(APIView):
         )
         from_email = settings.EMAIL_HOST_USER  # Use the configured email address
         recipient_list = ['tamisfahan@gmail.com']
-
+        print(subject, message, from_email, recipient_list)
         try:
             send_mail(subject, message, from_email, recipient_list, fail_silently=False)
             return Response({'message': 'Pre-registration successful!'}, status=status.HTTP_200_OK)

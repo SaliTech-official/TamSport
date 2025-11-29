@@ -72,7 +72,6 @@ export default function PreRegister() {
         errorNotif(t('submissionError', { ns: 'preRegister' }));
       }
     } catch (err) {
-      console.error("Submission error:", err);
       errorNotif(t('submissionError', { ns: 'preRegister' }));
     }
   };

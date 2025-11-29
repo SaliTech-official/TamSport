@@ -127,6 +127,8 @@ const commonResources = {
       articleNotFoundDescription: "We couldn't find the article you're looking for. It might have been moved or deleted.",
       articleNotFoundBackToHome: "Back to Home",
       // profile namespace
+      ProfileGuestUser: "Guest User",
+      ProfileAdminPanel: "Admin Panel",
       profileTabInfo: "User Information",
       profileTabHistory: "Class Pre-Registration History",
       profileTabSecurity: "Security & Login",
@@ -151,6 +153,7 @@ const commonResources = {
       roleAdmin: "Admin", // New translation
       roleAuthor: "Author", // New translation
       roleSeller: "Seller", // New translation
+      AdminPanel: "Admin Panel", // New translation
       roleNormalUser: "Normal User", // New translation
       profileUpdateError: "Error updating profile!", // New translation
       profileFirstNameMax: "First name cannot exceed {{max}} characters.", // Added
@@ -224,6 +227,7 @@ const commonResources = {
       resendCode: "Resend Code",
       verify: "Verify",
       // profile validation
+      profileGuestUser: "Guest User",
       profileProfileInfo: "Profile Information",
       profileEmail: "Email",
       profileEnterEmail: "Enter your email",
@@ -394,6 +398,8 @@ const commonResources = {
       articleNotFoundDescription: "متأسفانه مقاله‌ای که به دنبال آن هستید وجود ندارد یا منتقل شده است.",
       articleNotFoundBackToHome: "بازگشت به خانه",
       // profile namespace
+      ProfileGuestUser: "کاربر مهمان",
+      ProfileAdminPanel: "پنل مدیریت",
       profileTabInfo: "اطلاعات کاربر",
       profileTabHistory: "تاریخچه پیش‌ثبت‌نام",
       profileTabSecurity: "امنیت و ورود",
@@ -491,7 +497,9 @@ const commonResources = {
       resendCode: "ارسال مجدد کد",
       verify: "تأیید",
       // profile validation
+      profileGuestUser: "کاربر مهمان",
       profileProfileInfo: "اطلاعات پروفایل",
+      AdminPanel: "پنل مدیریت",
       profileEmail: "ایمیل",
       profileEnterEmail: "ایمیل خود را وارد کنید",
       profileUpdateEmail: "به‌روزرسانی ایمیل",

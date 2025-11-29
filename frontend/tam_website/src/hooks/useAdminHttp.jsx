@@ -54,7 +54,6 @@ const useAdminHttp = (url, options = null) => {
     };
 
     
-
     let response = await fetch(url, requestOptions);
     let responseData;
 
@@ -64,7 +63,7 @@ const useAdminHttp = (url, options = null) => {
     } catch (err) {
       responseData = { message: 'Invalid JSON response from server.' };
     }
-
+    
     // Handle token expiration and retry
     if (response.status === 401 && responseData?.messages?.[0]?.message === 'Token is expired') {
       const refreshed = await handleUnauthorized();
